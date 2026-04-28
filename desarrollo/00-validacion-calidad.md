@@ -19,6 +19,12 @@ Comando:
 gradle clean test
 ```
 
+Reporte de cobertura:
+
+```bash
+gradle clean test jacocoTestReport
+```
+
 ## Estado validado
 
 El comando fue ejecutado correctamente y el resultado fue:
@@ -102,9 +108,13 @@ Minimo actual:
 gradle clean test
 ```
 
+Cobertura actual:
+
+- JaCoCo configurado para todos los subproyectos Gradle.
+- Cada subproyecto genera reporte HTML y XML en `build/reports/jacoco/test`.
+
 Quality gates propuestos para siguientes sprints:
 
-- agregar JaCoCo,
 - agregar Checkstyle o Spotless,
 - agregar tests de integracion con Testcontainers,
 - agregar k6 para endpoints criticos,

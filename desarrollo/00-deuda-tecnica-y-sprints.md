@@ -12,6 +12,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 |---|---|---|
 | Java local 18 y objetivo profesional Java 21 | No permite validar localmente con Java 21 | Instalar JDK 21 y cambiar Gradle a `JavaVersion.VERSION_21` |
 | POMs y Gradle conviven | Puede generar confusion | Mantener Gradle como build oficial o alinear POMs en sprint posterior |
+| Quality gate de cobertura inicial | JaCoCo ya genera reportes por subproyecto, falta umbral minimo | Definir umbral por modulo cuando aumente la cobertura |
 | Persistencia in-memory | No prueba comportamiento real con DB | Agregar PostgreSQL, Flyway y Testcontainers por prioridad |
 | Pocos tests por proyecto | Valida solo reglas centrales | Ampliar unit tests, integration tests y controller tests |
 | Sin Docker Compose global | No hay entorno local completo | Crear compose para PostgreSQL, broker, observabilidad y servicios |
@@ -28,7 +29,7 @@ Objetivo:
 - Agregar JDK 21.
 - Decidir build oficial: Gradle o Maven.
 - Crear primer Docker Compose.
-- Agregar JaCoCo.
+- JaCoCo agregado; falta definir umbral minimo.
 
 Entregables:
 
@@ -124,4 +125,3 @@ Entregables:
 - Tests con WireMock.
 - Metricas de IA.
 - Guardrails basicos.
-
