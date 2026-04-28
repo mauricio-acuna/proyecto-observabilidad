@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: proyecto2027-postgres
+    environment:
+      POSTGRES_DB: proyecto2027
+      POSTGRES_USER: proyecto2027
+      POSTGRES_PASSWORD: proyecto2027
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U proyecto2027 -d proyecto2027"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: proyecto2027-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: proyecto2027
+      RABBITMQ_DEFAULT_PASS: proyecto2027
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.99.0
+    container_name: proyecto2027-otel-collector
+    command: ["--config=/etc/otel-collector-config.yml"]
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+    volumes:
+      - ./desarrollo/02-observability-control-plane/otel-collector-config.yml:/etc/otel-collector-config.yml:ro
+
+volumes:
+  postgres-data:
+  rabbitmq-data:

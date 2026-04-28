@@ -15,7 +15,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Quality gate de cobertura inicial | JaCoCo ya genera reportes por subproyecto, falta umbral minimo | Definir umbral por modulo cuando aumente la cobertura |
 | Persistencia in-memory | No prueba comportamiento real con DB | Agregar PostgreSQL, Flyway y Testcontainers por prioridad |
 | Pocos tests por proyecto | Valida solo reglas centrales | Ampliar unit tests, integration tests y controller tests |
-| Sin Docker Compose global | No hay entorno local completo | Crear compose para PostgreSQL, broker, observabilidad y servicios |
+| Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ y OpenTelemetry Collector; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
 | Sin performance ejecutada | No hay baseline de latencia/throughput | Agregar k6/Gatling y escenarios por API |
 | Observabilidad parcial | Actuator/config existe, pero falta collector real en todos | Integrar OpenTelemetry collector y dashboards |
 | Sin seguridad real en la mayoria | Falta auth en proyectos no-gateway | Propagar OAuth2/JWT desde gateway y tests de seguridad |
@@ -28,7 +28,7 @@ Objetivo:
 - Mantener `gradle clean test` en verde.
 - Agregar JDK 21.
 - Decidir build oficial: Gradle o Maven.
-- Crear primer Docker Compose.
+- Docker Compose inicial agregado.
 - JaCoCo agregado; falta definir umbral minimo.
 
 Entregables:

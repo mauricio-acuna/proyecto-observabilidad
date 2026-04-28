@@ -11,7 +11,7 @@ processors:
     limit_mib: 256
 
 exporters:
-  logging:
+  debug:
     verbosity: basic
 
 service:
@@ -19,8 +19,8 @@ service:
     traces:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [logging]
+      exporters: [debug]
     metrics:
       receivers: [otlp]
       processors: [memory_limiter, batch]
-      exporters: [logging]
+      exporters: [debug]

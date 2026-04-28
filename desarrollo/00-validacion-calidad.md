@@ -86,6 +86,20 @@ desarrollo/performance/k6
 
 Los scripts se deben ejecutar cuando los servicios esten levantados localmente.
 
+## Infraestructura local
+
+El repositorio incluye un `docker-compose.yml` inicial para levantar dependencias compartidas:
+
+- PostgreSQL en `localhost:5432`.
+- RabbitMQ en `localhost:5672` y consola web en `localhost:15672`.
+- OpenTelemetry Collector en `localhost:4317` y `localhost:4318`.
+
+Comando:
+
+```bash
+docker compose up -d
+```
+
 ## Definition of Done tecnica
 
 Un proyecto se considera presentable cuando tiene:
@@ -118,5 +132,4 @@ Quality gates propuestos para siguientes sprints:
 - agregar Checkstyle o Spotless,
 - agregar tests de integracion con Testcontainers,
 - agregar k6 para endpoints criticos,
-- agregar Docker Compose para dependencias locales,
 - agregar escaneo de dependencias.
