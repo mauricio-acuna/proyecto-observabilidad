@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'proyecto-observabilidad-java'
+
+include 'desarrollo:01-plataforma-soporte-bancario'
+include 'desarrollo:02-observability-control-plane'
+include 'desarrollo:03-event-driven-notification-hub'
+include 'desarrollo:04-secure-api-gateway-identity'
+include 'desarrollo:05-finops-cloud-cost-guardian'
+include 'desarrollo:06-rag-knowledge-assistant'
+include 'desarrollo:07-incident-response-runbook-system'
+include 'desarrollo:08-payment-risk-monitoring'
+include 'desarrollo:09-batch-reporting-modernization'
+include 'desarrollo:10-platform-engineering-service-template'
+include 'desarrollo:11-modular-monolith-to-microservices'
+include 'desarrollo:12-ai-ticket-triage-service'

@@ -1,0 +1,112 @@
+# Validacion, calidad y ejecucion
+
+## Estado objetivo
+
+Cada proyecto debe pasar por cuatro niveles de validacion:
+
+1. Compilacion.
+2. Tests unitarios de casos de uso.
+3. Tests de integracion cuando haya base de datos, broker o proveedor externo.
+4. Pruebas operativas: health, metricas, logs, trazas y escenarios de fallo.
+
+## Build local
+
+El repositorio tiene configuracion Gradle multi-proyecto en la raiz.
+
+Comando:
+
+```bash
+gradle clean test
+```
+
+## Estado validado
+
+El comando fue ejecutado correctamente y el resultado fue:
+
+```text
+BUILD SUCCESSFUL
+54 actionable tasks: 54 executed
+```
+
+Tests actuales:
+
+- 14 tests unitarios.
+- 12 proyectos con compilacion verificada.
+- 12 proyectos con al menos un test.
+- Sin tests de integracion reales todavia.
+- Sin pruebas de performance ejecutadas todavia.
+
+## CI
+
+Workflow:
+
+```text
+.github/workflows/desarrollo-ci.yml
+```
+
+El CI usa JDK 21 y ejecuta:
+
+```bash
+gradle clean test
+```
+
+## Nota sobre Java local
+
+En este entorno se detecto Java 18. Para poder compilar localmente, el build Gradle usa `sourceCompatibility = 17`, compatible con Spring Boot 3 y con el codigo actual.
+
+El objetivo profesional sigue siendo Java 21. Para evolucionar:
+
+1. Instalar JDK 21 local.
+2. Cambiar el build Gradle a `JavaVersion.VERSION_21`.
+3. Ejecutar `gradle clean test`.
+
+## Performance por tipo de proyecto
+
+| Tipo | Herramienta recomendada |
+|---|---|
+| APIs REST | k6, Gatling o JMeter |
+| Batch | metricas de duracion, throughput y registros rechazados |
+| Eventos | lag, retries, DLQ, tiempo de procesamiento |
+| IA/RAG | latencia total, latencia retrieval, tokens, costo y tasa de respuestas sin evidencia |
+| Observabilidad | cardinalidad, volumen de logs, costo de ingesta |
+
+## Scripts de performance
+
+Se agrego una primera carpeta de referencia:
+
+```text
+desarrollo/performance/k6
+```
+
+Los scripts se deben ejecutar cuando los servicios esten levantados localmente.
+
+## Definition of Done tecnica
+
+Un proyecto se considera presentable cuando tiene:
+
+- README claro.
+- Codigo compilando.
+- Tests unitarios.
+- Al menos un test de integracion si aplica.
+- Health endpoint si es servicio.
+- Documentacion de conceptos aplicados.
+- ADRs.
+- Deuda tecnica documentada.
+- Siguiente sprint definido.
+
+## Quality gates actuales
+
+Minimo actual:
+
+```bash
+gradle clean test
+```
+
+Quality gates propuestos para siguientes sprints:
+
+- agregar JaCoCo,
+- agregar Checkstyle o Spotless,
+- agregar tests de integracion con Testcontainers,
+- agregar k6 para endpoints criticos,
+- agregar Docker Compose para dependencias locales,
+- agregar escaneo de dependencias.

@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: secure-api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: support-platform
+          uri: http://localhost:8081
+          predicates:
+            - Path=/support/**
+          filters:
+            - StripPrefix=1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

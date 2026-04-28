@@ -1,0 +1,83 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.5' apply false
+    id 'io.spring.dependency-management' version '1.1.6' apply false
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.proyecto2027'
+    version = '0.1.0'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testImplementation 'org.assertj:assertj-core'
+    }
+
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+    }
+}
+
+configure([
+        project(':desarrollo:01-plataforma-soporte-bancario'),
+        project(':desarrollo:02-observability-control-plane'),
+        project(':desarrollo:03-event-driven-notification-hub'),
+        project(':desarrollo:05-finops-cloud-cost-guardian'),
+        project(':desarrollo:06-rag-knowledge-assistant'),
+        project(':desarrollo:07-incident-response-runbook-system'),
+        project(':desarrollo:08-payment-risk-monitoring'),
+        project(':desarrollo:09-batch-reporting-modernization'),
+        project(':desarrollo:10-platform-engineering-service-template'),
+        project(':desarrollo:11-modular-monolith-to-microservices'),
+        project(':desarrollo:12-ai-ticket-triage-service')
+]) {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+
+configure([
+        project(':desarrollo:01-plataforma-soporte-bancario'),
+        project(':desarrollo:12-ai-ticket-triage-service')
+]) {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
+    }
+}
+
+project(':desarrollo:04-secure-api-gateway-identity') {
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2023.0.3'
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+        implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+    }
+}
+
+project(':desarrollo:09-batch-reporting-modernization') {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-batch'
+    }
+}

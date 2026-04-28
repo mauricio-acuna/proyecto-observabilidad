@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proyecto 2027 - Dashboard de Desarrollo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Proyecto 2027</p>
+      <h1>Dashboard de Desarrollo</h1>
+      <p class="subtitle">Estado visible de proyectos, pruebas, deuda tecnica y proximos sprints.</p>
+    </div>
+    <div class="status-pill status-green">
+      BUILD SUCCESSFUL
+    </div>
+  </header>
+
+  <main>
+    <section class="metrics-grid" aria-label="Indicadores principales">
+      <article class="metric">
+        <span class="metric-label">Proyectos</span>
+        <strong>12</strong>
+        <span class="metric-note">Todos con base Java/Spring</span>
+      </article>
+      <article class="metric">
+        <span class="metric-label">Compilacion</span>
+        <strong>12/12</strong>
+        <span class="metric-note">Verificada con Gradle</span>
+      </article>
+      <article class="metric">
+        <span class="metric-label">Tests unitarios</span>
+        <strong>14</strong>
+        <span class="metric-note">0 fallos, 0 errores</span>
+      </article>
+      <article class="metric">
+        <span class="metric-label">Tareas Gradle</span>
+        <strong>54</strong>
+        <span class="metric-note">Ejecutadas correctamente</span>
+      </article>
+    </section>
+
+    <section class="band split">
+      <div>
+        <h2>Lectura Ejecutiva</h2>
+        <p>
+          La cartera ya no es solo documentacion: los 12 proyectos tienen codigo fuente,
+          estructura compilable, tests unitarios minimos y documentacion tecnica asociada.
+        </p>
+        <p>
+          El siguiente salto no es crear mas ideas, sino endurecer las existentes con
+          integracion real: PostgreSQL, broker, Docker Compose, observabilidad completa,
+          seguridad y performance ejecutada.
+        </p>
+      </div>
+      <div class="build-panel">
+        <h3>Ultima Validacion</h3>
+        <pre><code>gradle clean test --console=plain
+BUILD SUCCESSFUL
+54 actionable tasks: 54 executed</code></pre>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="section-header">
+        <div>
+          <h2>Dolores Principales</h2>
+          <p>Lo que no se debe perder de vista antes de vender estos proyectos como productivos.</p>
+        </div>
+      </div>
+      <div class="pain-grid">
+        <article class="pain pain-high">
+          <h3>Persistencia real pendiente</h3>
+          <p>Varios proyectos usan adapters in-memory. Falta PostgreSQL, Flyway y Testcontainers donde aplique.</p>
+        </article>
+        <article class="pain pain-high">
+          <h3>Eventos reales pendientes</h3>
+          <p>El hub de eventos modela idempotencia, pero falta broker real, retries persistentes y DLQ observable.</p>
+        </article>
+        <article class="pain pain-medium">
+          <h3>Observabilidad parcial</h3>
+          <p>Hay Actuator, Micrometer y documentos, pero falta collector, dashboards y trazas reales end-to-end.</p>
+        </article>
+        <article class="pain pain-medium">
+          <h3>Performance no ejecutada</h3>
+          <p>Existe script k6 inicial. Aun falta levantar servicios y capturar baseline de latencia p95.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="band">
+      <h2>Estado por Proyecto</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Proyecto</th>
+              <th>Estado</th>
+              <th>Demuestra</th>
+              <th>Siguiente paso</th>
+            </tr>
+          </thead>
+          <tbody id="projectRows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="band">
+      <h2>Cobertura del Stack Profesional</h2>
+      <div class="coverage-list" id="coverageList"></div>
+    </section>
+
+    <section class="band">
+      <h2>Roadmap de Sprints</h2>
+      <div class="timeline" id="sprintTimeline"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Fuente: desarrollo/00-validacion-calidad.md y desarrollo/00-deuda-tecnica-y-sprints.md</span>
+    <span>Estado: base compilada y testeada a nivel unitario</span>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
