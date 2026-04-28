@@ -13,7 +13,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Java local 18 y objetivo profesional Java 21 | No permite validar localmente con Java 21 | Instalar JDK 21 y cambiar Gradle a `JavaVersion.VERSION_21` |
 | POMs y Gradle conviven | Puede generar confusion | Mantener Gradle como build oficial o alinear POMs en sprint posterior |
 | Quality gate de cobertura inicial | JaCoCo ya genera reportes por subproyecto, falta umbral minimo | Definir umbral por modulo cuando aumente la cobertura |
-| Persistencia y eventos 01 -> 03 | Adapter JPA, Flyway, outbox, relay RabbitMQ y consumer RabbitMQ agregados; falta ejecutar integracion con Docker local | Validar flujo completo con Docker disponible y agregar DLQ/retries |
+| Persistencia y eventos 01 -> 03 | Adapter JPA, Flyway, outbox, relay RabbitMQ, consumer, retry y DLQ agregados; falta ejecutar integracion con Docker local | Validar flujo completo con Docker disponible y persistir intentos |
 | Pocos tests por proyecto | Valida solo reglas centrales | Ampliar unit tests, integration tests y controller tests |
 | Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ y OpenTelemetry Collector; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
 | Sin performance ejecutada | No hay baseline de latencia/throughput | Agregar k6/Gatling y escenarios por API |
@@ -58,7 +58,7 @@ Entregables:
 Objetivo:
 
 - Proyecto 03 convertido a consumer RabbitMQ para `ticket.created`.
-- Falta agregar retries y DLQ.
+- Retry y DLQ RabbitMQ agregados.
 - Integracion logica 01 -> 03 agregada via outbox relay y queue compartida.
 
 Entregables:

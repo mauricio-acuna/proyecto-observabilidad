@@ -6,6 +6,15 @@ spring:
     port: ${APP_RABBITMQ_PORT:5672}
     username: ${APP_RABBITMQ_USERNAME:proyecto2027}
     password: ${APP_RABBITMQ_PASSWORD:proyecto2027}
+    listener:
+      simple:
+        default-requeue-rejected: false
+        retry:
+          enabled: true
+          max-attempts: ${APP_RABBITMQ_RETRY_MAX_ATTEMPTS:3}
+          initial-interval: ${APP_RABBITMQ_RETRY_INITIAL_INTERVAL_MS:1000}
+          multiplier: ${APP_RABBITMQ_RETRY_MULTIPLIER:2.0}
+          max-interval: ${APP_RABBITMQ_RETRY_MAX_INTERVAL_MS:10000}
 
 app:
   notifications:

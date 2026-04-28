@@ -47,7 +47,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 |---|---|---|
 | 01 Plataforma soporte bancario | Dominio, use cases, REST, observabilidad, repositorios JPA, migraciones Flyway, outbox persistente, relay RabbitMQ y tests Testcontainers preparados | Ejecutar integracion con Docker y conectar consumer real en proyecto 03 |
 | 02 Observability control plane | Politicas de telemetria, collector config, API | Agregar dashboards Grafana y reglas SLO |
-| 03 Event-driven notification hub | Consumidor idempotente, sender desacoplado y listener RabbitMQ para `ticket.created` | Agregar retries y DLQ persistente |
+| 03 Event-driven notification hub | Consumidor idempotente, sender desacoplado, listener RabbitMQ, retry configurado y DLQ declarada | Validar flujo completo con Docker y persistir intentos |
 | 04 Secure API gateway identity | Gateway, security config, correlation id | Agregar Redis rate limiting y Keycloak local |
 | 05 FinOps cloud cost guardian | Analisis de costos simulado y recomendaciones | Integrar AWS Cost Explorer con adapter real |
 | 06 RAG knowledge assistant | Pipeline RAG conceptual con puertos de vector search y LLM | Agregar pgvector/Qdrant y evaluacion de respuestas |

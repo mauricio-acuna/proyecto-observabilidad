@@ -55,7 +55,15 @@ Integracion actual:
 - Exchange: `support.events`.
 - Queue: `notification.ticket-created`.
 - Routing key: `ticket.created`.
+- Dead-letter exchange: `support.events.dlx`.
+- Dead-letter queue: `notification.ticket-created.dlq`.
 - Productor esperado: outbox relay de `01-plataforma-soporte-bancario`.
+
+Retry del listener:
+
+- 3 intentos por defecto.
+- Rechazo sin requeue al agotar intentos.
+- Enrutamiento a DLQ por configuracion de RabbitMQ.
 
 Tablas:
 

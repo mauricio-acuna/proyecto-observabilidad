@@ -72,6 +72,7 @@ configure([
 project(':desarrollo:03-event-driven-notification-hub') {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-amqp'
+        implementation 'org.springframework.retry:spring-retry'
     }
 }
 
@@ -89,6 +90,7 @@ project(':desarrollo:01-plataforma-soporte-bancario') {
         implementation 'org.springframework.boot:spring-boot-starter-amqp'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         implementation 'org.flywaydb:flyway-core'
+        implementation 'org.springframework.retry:spring-retry'
         runtimeOnly 'org.postgresql:postgresql'
         testImplementation 'org.testcontainers:junit-jupiter'
         testImplementation 'org.testcontainers:postgresql'

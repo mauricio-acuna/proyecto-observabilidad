@@ -35,4 +35,5 @@ El proyecto 01 ya publica eventos desde outbox hacia RabbitMQ. Este listener per
 
 - El contrato entre productor y consumidor queda basado en el payload `TicketCreated`.
 - La idempotencia sigue en la capa de aplicacion.
-- Faltan retry policy explicita, DLQ persistente y metricas de backlog.
+- Retry policy y DLQ RabbitMQ quedan configurados.
+- Faltan persistencia de intentos, dashboard de backlog y prueba end-to-end con Docker local.
