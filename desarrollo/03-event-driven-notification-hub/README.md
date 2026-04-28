@@ -71,6 +71,14 @@ Snapshot operativo:
 GET /api/notifications/operations/snapshot
 ```
 
+Metricas Micrometer expuestas por Actuator:
+
+- `notification_hub_processed_events_total`
+- `notification_hub_attempts_total`
+- `notification_hub_sent_notifications_total`
+- `notification_hub_failed_notifications_total`
+- `notification_hub_dead_letter_events_total`
+
 Retry del listener:
 
 - 3 intentos por defecto.
