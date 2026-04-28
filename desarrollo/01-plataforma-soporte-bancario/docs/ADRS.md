@@ -81,4 +81,5 @@ El adapter de log queda solo para el perfil `in-memory`.
 
 - La creacion del ticket y el evento quedan dentro del mismo limite transaccional.
 - El sistema puede reintentar publicacion al broker sin duplicar el ticket.
-- Falta implementar el relay que lea `PENDING`, publique a RabbitMQ/Kafka/SQS y marque `PUBLISHED` o `FAILED`.
+- El relay RabbitMQ lee `PENDING`, publica en `support.events` y marca `PUBLISHED` o `FAILED`.
+- El siguiente paso es conectar `03-event-driven-notification-hub` como consumidor real.

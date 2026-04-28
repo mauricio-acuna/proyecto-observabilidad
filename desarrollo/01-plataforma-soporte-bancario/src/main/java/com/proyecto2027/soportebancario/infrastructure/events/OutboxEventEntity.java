@@ -36,6 +36,12 @@ class OutboxEventEntity {
     @Column(nullable = false)
     private Instant createdAt;
 
+    @Column
+    private Instant publishedAt;
+
+    @Column(columnDefinition = "text")
+    private String lastError;
+
     protected OutboxEventEntity() {
     }
 
@@ -75,5 +81,16 @@ class OutboxEventEntity {
 
     OutboxEventStatus status() {
         return status;
+    }
+
+    void markPublished(Instant publishedAt) {
+        this.status = OutboxEventStatus.PUBLISHED;
+        this.publishedAt = publishedAt;
+        this.lastError = null;
+    }
+
+    void markFailed(String lastError) {
+        this.status = OutboxEventStatus.FAILED;
+        this.lastError = lastError;
     }
 }

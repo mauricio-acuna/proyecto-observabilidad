@@ -44,6 +44,7 @@ El servicio ya tiene adapters JPA para los puertos `CustomerRepository` y `Ticke
 - La configuracion por defecto apunta al PostgreSQL del `docker-compose.yml` de la raiz.
 - Para usar los repositorios en memoria, activar el perfil `in-memory`.
 - Los eventos de dominio se guardan como mensajes pendientes en `outbox_events`.
+- El relay publica eventos pendientes a RabbitMQ en el exchange `support.events`.
 
 Variables soportadas:
 
@@ -51,6 +52,11 @@ Variables soportadas:
 APP_DATASOURCE_URL=jdbc:postgresql://localhost:5432/proyecto2027
 APP_DATASOURCE_USERNAME=proyecto2027
 APP_DATASOURCE_PASSWORD=proyecto2027
+APP_RABBITMQ_HOST=localhost
+APP_RABBITMQ_PORT=5672
+APP_RABBITMQ_USERNAME=proyecto2027
+APP_RABBITMQ_PASSWORD=proyecto2027
+APP_OUTBOX_RELAY_ENABLED=true
 ```
 
 Perfil in-memory:

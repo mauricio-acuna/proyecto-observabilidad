@@ -7,4 +7,6 @@ import java.util.UUID;
 
 interface SpringDataOutboxEventRepository extends JpaRepository<OutboxEventEntity, UUID> {
     List<OutboxEventEntity> findByStatusOrderByCreatedAtAsc(OutboxEventStatus status);
+
+    List<OutboxEventEntity> findTop50ByStatusOrderByCreatedAtAsc(OutboxEventStatus status);
 }
