@@ -4,6 +4,7 @@ import com.proyecto2027.soportebancario.domain.SupportTicket;
 import com.proyecto2027.soportebancario.domain.TicketCreatedEvent;
 import com.proyecto2027.soportebancario.domain.TicketPriority;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public class OpenTicketUseCase {
         this.auditPort = auditPort;
     }
 
+    @Transactional
     public SupportTicket execute(UUID customerId, String subject, String description, TicketPriority priority) {
         customerRepository.findById(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found: " + customerId));

@@ -37,10 +37,10 @@ BUILD SUCCESSFUL
 Tests actuales:
 
 - 14 tests ejecutados.
-- 1 test de integracion Testcontainers preparado y omitido cuando Docker no esta disponible.
+- 2 tests de integracion Testcontainers preparados y omitidos cuando Docker no esta disponible.
 - 12 proyectos con compilacion verificada.
 - 12 proyectos con al menos un test.
-- Primer test de integracion real agregado para persistencia PostgreSQL del proyecto 01.
+- Tests de integracion reales agregados para persistencia PostgreSQL y outbox del proyecto 01.
 - Sin pruebas de performance ejecutadas todavia.
 
 ## CI

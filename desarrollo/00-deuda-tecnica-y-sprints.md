@@ -13,7 +13,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Java local 18 y objetivo profesional Java 21 | No permite validar localmente con Java 21 | Instalar JDK 21 y cambiar Gradle a `JavaVersion.VERSION_21` |
 | POMs y Gradle conviven | Puede generar confusion | Mantener Gradle como build oficial o alinear POMs en sprint posterior |
 | Quality gate de cobertura inicial | JaCoCo ya genera reportes por subproyecto, falta umbral minimo | Definir umbral por modulo cuando aumente la cobertura |
-| Persistencia del proyecto 01 | Adapter JPA, Flyway y test Testcontainers agregados; falta ejecutar contra Docker local | Validar con Docker disponible y avanzar con outbox |
+| Persistencia y outbox del proyecto 01 | Adapter JPA, Flyway, outbox y tests Testcontainers agregados; falta ejecutar contra Docker local | Validar con Docker disponible y avanzar con relay a broker |
 | Pocos tests por proyecto | Valida solo reglas centrales | Ampliar unit tests, integration tests y controller tests |
 | Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ y OpenTelemetry Collector; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
 | Sin performance ejecutada | No hay baseline de latencia/throughput | Agregar k6/Gatling y escenarios por API |
@@ -44,7 +44,7 @@ Objetivo:
 
 - Reemplazo in-memory en proyecto 01 iniciado con PostgreSQL/Flyway.
 - Testcontainers agregado para repositorios del proyecto 01.
-- Agregar outbox persistente.
+- Outbox persistente agregado; falta relay a broker.
 
 Entregables:
 

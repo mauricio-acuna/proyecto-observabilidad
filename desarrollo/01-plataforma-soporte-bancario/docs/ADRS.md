@@ -65,3 +65,20 @@ Los repositorios in-memory quedan disponibles solo con el perfil `in-memory`.
 - El esquema queda versionado y validado por `ddl-auto: validate`.
 - Los tests de integracion con Testcontainers quedan preparados para ejecutarse cuando Docker este disponible.
 - El siguiente paso natural es persistir eventos con outbox en la misma transaccion.
+
+## ADR-005: Guardar eventos en outbox antes de publicar a broker
+
+### Contexto
+
+Publicar directamente a un broker desde el caso de uso puede perder eventos si la transaccion de base de datos confirma pero el broker falla, o si el broker confirma y luego falla la persistencia del ticket.
+
+### Decision
+
+El puerto `DomainEventPublisher` usa por defecto un adapter de outbox que guarda `TicketCreated` en `outbox_events` con estado `PENDING`.
+El adapter de log queda solo para el perfil `in-memory`.
+
+### Consecuencias
+
+- La creacion del ticket y el evento quedan dentro del mismo limite transaccional.
+- El sistema puede reintentar publicacion al broker sin duplicar el ticket.
+- Falta implementar el relay que lea `PENDING`, publique a RabbitMQ/Kafka/SQS y marque `PUBLISHED` o `FAILED`.

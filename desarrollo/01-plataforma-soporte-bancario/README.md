@@ -43,6 +43,7 @@ El servicio ya tiene adapters JPA para los puertos `CustomerRepository` y `Ticke
 - La migracion inicial esta en `src/main/resources/db/migration`.
 - La configuracion por defecto apunta al PostgreSQL del `docker-compose.yml` de la raiz.
 - Para usar los repositorios en memoria, activar el perfil `in-memory`.
+- Los eventos de dominio se guardan como mensajes pendientes en `outbox_events`.
 
 Variables soportadas:
 
@@ -50,6 +51,12 @@ Variables soportadas:
 APP_DATASOURCE_URL=jdbc:postgresql://localhost:5432/proyecto2027
 APP_DATASOURCE_USERNAME=proyecto2027
 APP_DATASOURCE_PASSWORD=proyecto2027
+```
+
+Perfil in-memory:
+
+```bash
+SPRING_PROFILES_ACTIVE=in-memory
 ```
 
 ## Patrones y soluciones

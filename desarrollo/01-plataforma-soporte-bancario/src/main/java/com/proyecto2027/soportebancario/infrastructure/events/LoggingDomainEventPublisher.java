@@ -2,11 +2,13 @@ package com.proyecto2027.soportebancario.infrastructure.events;
 
 import com.proyecto2027.soportebancario.application.DomainEventPublisher;
 import com.proyecto2027.soportebancario.domain.TicketCreatedEvent;
+import org.springframework.context.annotation.Profile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("in-memory")
 public class LoggingDomainEventPublisher implements DomainEventPublisher {
 
     private static final Logger log = LoggerFactory.getLogger(LoggingDomainEventPublisher.class);
