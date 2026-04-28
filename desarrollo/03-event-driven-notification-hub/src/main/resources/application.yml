@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: event-driven-notification-hub
+  rabbitmq:
+    host: ${APP_RABBITMQ_HOST:localhost}
+    port: ${APP_RABBITMQ_PORT:5672}
+    username: ${APP_RABBITMQ_USERNAME:proyecto2027}
+    password: ${APP_RABBITMQ_PASSWORD:proyecto2027}
+
+app:
+  notifications:
+    ticket-created-recipient: ${APP_TICKET_CREATED_RECIPIENT:ops@example.com}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      service: ${spring.application.name}

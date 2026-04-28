@@ -9,6 +9,7 @@ Este proyecto demuestra arquitectura orientada a eventos, resiliencia e idempote
 ## Capacidades funcionales
 
 - Recepcion de eventos de negocio.
+- Consumo RabbitMQ de eventos `ticket.created`.
 - Envio de email/SMS simulado.
 - Reintentos controlados.
 - DLQ para mensajes fallidos.
@@ -49,6 +50,13 @@ Eventos:
 - `CustomerVerified`
 - `NotificationRequested`
 
+Integracion actual:
+
+- Exchange: `support.events`.
+- Queue: `notification.ticket-created`.
+- Routing key: `ticket.created`.
+- Productor esperado: outbox relay de `01-plataforma-soporte-bancario`.
+
 Tablas:
 
 - `processed_events`
@@ -72,4 +80,3 @@ Tablas:
 - Tests con Testcontainers.
 - Dashboard de procesamiento.
 - ADR sobre eleccion Kafka/RabbitMQ/SQS.
-

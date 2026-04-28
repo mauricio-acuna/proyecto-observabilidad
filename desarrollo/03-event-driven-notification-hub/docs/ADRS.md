@@ -20,3 +20,19 @@ El primer corte usa un endpoint REST como entrada de eventos.
 
 Permite probar reglas de idempotencia antes de introducir Kafka, RabbitMQ o SQS.
 
+## ADR-003: Consumir eventos desde RabbitMQ
+
+### Decision
+
+Agregar un listener RabbitMQ para la cola `notification.ticket-created`, enlazada al exchange `support.events` con routing key `ticket.created`.
+El endpoint HTTP queda como entrada manual para pruebas y demos.
+
+### Motivo
+
+El proyecto 01 ya publica eventos desde outbox hacia RabbitMQ. Este listener permite demostrar integracion asincrona real sin cambiar el caso de uso idempotente.
+
+### Consecuencias
+
+- El contrato entre productor y consumidor queda basado en el payload `TicketCreated`.
+- La idempotencia sigue en la capa de aplicacion.
+- Faltan retry policy explicita, DLQ persistente y metricas de backlog.

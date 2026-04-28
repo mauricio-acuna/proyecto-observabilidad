@@ -69,6 +69,12 @@ configure([
     }
 }
 
+project(':desarrollo:03-event-driven-notification-hub') {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    }
+}
+
 configure([
         project(':desarrollo:01-plataforma-soporte-bancario'),
         project(':desarrollo:12-ai-ticket-triage-service')
