@@ -48,3 +48,20 @@ Modelar `TicketCreatedEvent` y publicarlo desde el caso de uso.
 - Aparece necesidad de idempotencia y DLQ en consumidores.
 - Permite explicar event-driven architecture.
 
+## ADR-004: Migrar persistencia principal a PostgreSQL con Flyway
+
+### Contexto
+
+El proyecto principal debe demostrar persistencia real sin acoplar los casos de uso a JPA.
+
+### Decision
+
+Mantener los puertos `CustomerRepository` y `TicketRepository`, agregar adapters JPA y gobernar el esquema con Flyway.
+Los repositorios in-memory quedan disponibles solo con el perfil `in-memory`.
+
+### Consecuencias
+
+- Los casos de uso no cambian al mover la persistencia a PostgreSQL.
+- El esquema queda versionado y validado por `ddl-auto: validate`.
+- Los tests de integracion con Testcontainers quedan preparados para ejecutarse cuando Docker este disponible.
+- El siguiente paso natural es persistir eventos con outbox en la misma transaccion.

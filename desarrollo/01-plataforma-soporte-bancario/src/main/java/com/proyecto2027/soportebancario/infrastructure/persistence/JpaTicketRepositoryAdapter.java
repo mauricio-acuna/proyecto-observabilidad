@@ -6,32 +6,33 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-@Profile("in-memory")
-public class InMemoryTicketRepository implements TicketRepository {
+@Profile("!in-memory")
+public class JpaTicketRepositoryAdapter implements TicketRepository {
 
-    private final Map<UUID, SupportTicket> tickets = new ConcurrentHashMap<>();
+    private final SpringDataTicketJpaRepository repository;
+
+    public JpaTicketRepositoryAdapter(SpringDataTicketJpaRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public SupportTicket save(SupportTicket ticket) {
-        tickets.put(ticket.id(), ticket);
-        return ticket;
+        return repository.save(JpaSupportTicketEntity.fromDomain(ticket)).toDomain();
     }
 
     @Override
     public Optional<SupportTicket> findById(UUID id) {
-        return Optional.ofNullable(tickets.get(id));
+        return repository.findById(id).map(JpaSupportTicketEntity::toDomain);
     }
 
     @Override
     public List<SupportTicket> findByCustomerId(UUID customerId) {
-        return tickets.values().stream()
-                .filter(ticket -> ticket.customerId().equals(customerId))
+        return repository.findByCustomerId(customerId).stream()
+                .map(JpaSupportTicketEntity::toDomain)
                 .toList();
     }
 }

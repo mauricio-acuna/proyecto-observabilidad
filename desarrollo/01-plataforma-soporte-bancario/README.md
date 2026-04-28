@@ -36,6 +36,22 @@ Este proyecto sirve como proyecto principal de portfolio porque permite demostra
 - OpenTelemetry.
 - Prometheus/Grafana o CloudWatch.
 
+## Persistencia local
+
+El servicio ya tiene adapters JPA para los puertos `CustomerRepository` y `TicketRepository`.
+
+- La migracion inicial esta en `src/main/resources/db/migration`.
+- La configuracion por defecto apunta al PostgreSQL del `docker-compose.yml` de la raiz.
+- Para usar los repositorios en memoria, activar el perfil `in-memory`.
+
+Variables soportadas:
+
+```bash
+APP_DATASOURCE_URL=jdbc:postgresql://localhost:5432/proyecto2027
+APP_DATASOURCE_USERNAME=proyecto2027
+APP_DATASOURCE_PASSWORD=proyecto2027
+```
+
 ## Patrones y soluciones
 
 - Arquitectura por servicios.
@@ -90,4 +106,3 @@ Eventos:
 - Pipeline CI.
 - Dashboard basico.
 - Runbook de incidente.
-

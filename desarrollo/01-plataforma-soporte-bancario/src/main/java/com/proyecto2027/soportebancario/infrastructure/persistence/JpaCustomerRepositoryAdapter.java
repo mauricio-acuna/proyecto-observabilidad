@@ -5,25 +5,26 @@ import com.proyecto2027.soportebancario.domain.Customer;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-@Profile("in-memory")
-public class InMemoryCustomerRepository implements CustomerRepository {
+@Profile("!in-memory")
+public class JpaCustomerRepositoryAdapter implements CustomerRepository {
 
-    private final Map<UUID, Customer> customers = new ConcurrentHashMap<>();
+    private final SpringDataCustomerJpaRepository repository;
+
+    public JpaCustomerRepositoryAdapter(SpringDataCustomerJpaRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Customer save(Customer customer) {
-        customers.put(customer.id(), customer);
-        return customer;
+        return repository.save(JpaCustomerEntity.fromDomain(customer)).toDomain();
     }
 
     @Override
     public Optional<Customer> findById(UUID id) {
-        return Optional.ofNullable(customers.get(id));
+        return repository.findById(id).map(JpaCustomerEntity::toDomain);
     }
 }

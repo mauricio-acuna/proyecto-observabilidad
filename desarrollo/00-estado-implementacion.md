@@ -26,14 +26,16 @@ Resultado:
 
 ```text
 BUILD SUCCESSFUL
-54 actionable tasks: 54 executed
+66 actionable tasks: 66 executed
 ```
 
 Cobertura actual:
 
 - 12 proyectos compilados.
 - 12 proyectos con al menos un test unitario.
+- 15 tests detectados.
 - 14 tests ejecutados.
+- 1 test de integracion Testcontainers omitido porque Docker no esta disponible en este entorno.
 - 0 fallos.
 - 0 errores.
 
@@ -43,7 +45,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 
 | Proyecto | Estado actual | Proximo incremento recomendado |
 |---|---|---|
-| 01 Plataforma soporte bancario | Base mas completa: dominio, use cases, adapters, REST, observabilidad, test | Reemplazar in-memory por PostgreSQL/Flyway y agregar outbox real |
+| 01 Plataforma soporte bancario | Dominio, use cases, REST, observabilidad, repositorios JPA, migracion Flyway y test Testcontainers preparado | Ejecutar integracion con Docker y agregar outbox real |
 | 02 Observability control plane | Politicas de telemetria, collector config, API | Agregar dashboards Grafana y reglas SLO |
 | 03 Event-driven notification hub | Consumidor idempotente y sender desacoplado | Agregar broker real, retries y DLQ persistente |
 | 04 Secure API gateway identity | Gateway, security config, correlation id | Agregar Redis rate limiting y Keycloak local |
