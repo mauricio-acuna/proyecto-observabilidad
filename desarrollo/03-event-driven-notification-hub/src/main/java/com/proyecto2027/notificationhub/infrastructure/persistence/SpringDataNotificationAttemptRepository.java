@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface SpringDataNotificationAttemptRepository extends JpaRepository<NotificationAttemptEntity, UUID> {
     List<NotificationAttemptEntity> findByEventId(UUID eventId);
+
+    long countByStatus(NotificationAttemptStatus status);
 }

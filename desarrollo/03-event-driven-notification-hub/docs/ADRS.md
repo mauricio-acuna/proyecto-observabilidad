@@ -53,4 +53,5 @@ La idempotencia en memoria no sobrevive reinicios y no deja evidencia operaciona
 
 - El consumidor puede reiniciarse sin perder historial de eventos procesados.
 - La DLQ queda consultable desde base de datos, no solo desde RabbitMQ.
-- Falta exponer metricas de backlog y endpoints/reportes operativos.
+- El snapshot operativo expone conteos de eventos procesados, intentos y DLQ.
+- Falta exponer metricas Micrometer especificas de backlog.

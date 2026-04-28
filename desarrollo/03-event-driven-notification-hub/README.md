@@ -65,6 +65,12 @@ Persistencia operativa:
 - `notification_attempts`: registra envios simulados.
 - `dead_letter_events`: guarda payloads recibidos desde la DLQ.
 
+Snapshot operativo:
+
+```text
+GET /api/notifications/operations/snapshot
+```
+
 Retry del listener:
 
 - 3 intentos por defecto.
