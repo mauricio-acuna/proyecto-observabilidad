@@ -13,7 +13,7 @@ Este proyecto demuestra arquitectura orientada a eventos, resiliencia e idempote
 - Envio de email/SMS simulado.
 - Reintentos controlados.
 - DLQ para mensajes fallidos.
-- Idempotencia por event ID.
+- Idempotencia persistente por event ID.
 - Auditoria de procesamiento.
 - Dashboard de errores.
 
@@ -58,6 +58,12 @@ Integracion actual:
 - Dead-letter exchange: `support.events.dlx`.
 - Dead-letter queue: `notification.ticket-created.dlq`.
 - Productor esperado: outbox relay de `01-plataforma-soporte-bancario`.
+
+Persistencia operativa:
+
+- `processed_events`: evita reprocesar eventos duplicados.
+- `notification_attempts`: registra envios simulados.
+- `dead_letter_events`: guarda payloads recibidos desde la DLQ.
 
 Retry del listener:
 

@@ -33,9 +33,9 @@ Cobertura actual:
 
 - 12 proyectos compilados.
 - 12 proyectos con al menos un test unitario.
-- 19 tests detectados.
-- 17 tests ejecutados.
-- 2 tests de integracion Testcontainers omitidos porque Docker no esta disponible en este entorno.
+- 21 tests detectados.
+- 18 tests ejecutados.
+- 3 tests de integracion Testcontainers omitidos porque Docker no esta disponible en este entorno.
 - 0 fallos.
 - 0 errores.
 
@@ -47,7 +47,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 |---|---|---|
 | 01 Plataforma soporte bancario | Dominio, use cases, REST, observabilidad, repositorios JPA, migraciones Flyway, outbox persistente, relay RabbitMQ y tests Testcontainers preparados | Ejecutar integracion con Docker y conectar consumer real en proyecto 03 |
 | 02 Observability control plane | Politicas de telemetria, collector config, API | Agregar dashboards Grafana y reglas SLO |
-| 03 Event-driven notification hub | Consumidor idempotente, sender desacoplado, listener RabbitMQ, retry configurado y DLQ declarada | Validar flujo completo con Docker y persistir intentos |
+| 03 Event-driven notification hub | Consumidor idempotente, sender desacoplado, listener RabbitMQ, retry, DLQ, processed events persistentes e intentos/dead letters auditables | Validar flujo completo con Docker y agregar metricas de backlog |
 | 04 Secure API gateway identity | Gateway, security config, correlation id | Agregar Redis rate limiting y Keycloak local |
 | 05 FinOps cloud cost guardian | Analisis de costos simulado y recomendaciones | Integrar AWS Cost Explorer con adapter real |
 | 06 RAG knowledge assistant | Pipeline RAG conceptual con puertos de vector search y LLM | Agregar pgvector/Qdrant y evaluacion de respuestas |

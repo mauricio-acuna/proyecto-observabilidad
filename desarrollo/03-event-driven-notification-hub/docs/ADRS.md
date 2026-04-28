@@ -37,3 +37,20 @@ El proyecto 01 ya publica eventos desde outbox hacia RabbitMQ. Este listener per
 - La idempotencia sigue en la capa de aplicacion.
 - Retry policy y DLQ RabbitMQ quedan configurados.
 - Faltan persistencia de intentos, dashboard de backlog y prueba end-to-end con Docker local.
+
+## ADR-004: Persistir idempotencia e informacion operativa
+
+### Decision
+
+Guardar `processed_events`, `notification_attempts` y `dead_letter_events` en PostgreSQL usando Flyway y adapters JPA.
+El store in-memory queda disponible solo con el perfil `in-memory`.
+
+### Motivo
+
+La idempotencia en memoria no sobrevive reinicios y no deja evidencia operacional. Persistir estos datos permite auditar duplicados, intentos y mensajes enviados a DLQ.
+
+### Consecuencias
+
+- El consumidor puede reiniciarse sin perder historial de eventos procesados.
+- La DLQ queda consultable desde base de datos, no solo desde RabbitMQ.
+- Falta exponer metricas de backlog y endpoints/reportes operativos.
