@@ -15,9 +15,9 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Quality gate de cobertura inicial | JaCoCo ya genera reportes por subproyecto, falta umbral minimo | Definir umbral por modulo cuando aumente la cobertura |
 | Persistencia y eventos 01 -> 03 | Adapter JPA, Flyway, outbox, relay RabbitMQ, consumer, retry, DLQ, processed events e intentos persistentes agregados; falta ejecutar integracion con Docker local | Validar flujo completo con Docker disponible y agregar metricas de backlog |
 | Pocos tests por proyecto | Valida solo reglas centrales | Ampliar unit tests, integration tests y controller tests |
-| Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ y OpenTelemetry Collector; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
+| Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ, OpenTelemetry Collector, Prometheus y Grafana; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
 | Sin performance ejecutada | No hay baseline de latencia/throughput | Agregar k6/Gatling y escenarios por API |
-| Observabilidad parcial | Actuator/config existe, pero falta collector real en todos | Integrar OpenTelemetry collector y dashboards |
+| Observabilidad operativa inicial | Servicios 01 y 03 exponen Prometheus, exportan trazas OTLP y tienen dashboard Grafana inicial | Validar con Docker local y ampliar SLI/SLO/runbooks |
 | Sin seguridad real en la mayoria | Falta auth en proyectos no-gateway | Propagar OAuth2/JWT desde gateway y tests de seguridad |
 | IA simulada | No llama proveedor real | Agregar adapter real y WireMock para pruebas |
 
@@ -73,7 +73,7 @@ Entregables:
 Objetivo:
 
 - Integrar OpenTelemetry Collector.
-- Agregar dashboards.
+- Dashboard Grafana inicial agregado.
 - Definir SLI/SLO.
 
 Entregables:

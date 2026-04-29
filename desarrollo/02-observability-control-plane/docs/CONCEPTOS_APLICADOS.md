@@ -16,6 +16,11 @@ El proyecto no instala una herramienta aislada: define politicas comunes que los
 
 `otel-collector-config.yml` muestra la pieza que desacopla aplicaciones de backends finales.
 
+## Prometheus y Grafana
+
+Prometheus scrapea las metricas Actuator de los servicios principales y Grafana provisiona un dashboard inicial desde el repositorio.
+Esto permite demostrar una ruta completa desde codigo instrumentado hasta visualizacion operativa.
+
 ## SLI/SLO
 
 La siguiente evolucion del proyecto es asociar cada servicio a SLI/SLO y reglas de alerta.
@@ -30,4 +35,3 @@ La siguiente evolucion del proyecto es asociar cada servicio a SLI/SLO y reglas 
 - Cardinalidad.
 - Estandares internos.
 - Platform Engineering inicial.
-

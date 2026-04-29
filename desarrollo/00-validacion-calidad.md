@@ -94,12 +94,21 @@ El repositorio incluye un `docker-compose.yml` inicial para levantar dependencia
 - PostgreSQL en `localhost:5432`.
 - RabbitMQ en `localhost:5672` y consola web en `localhost:15672`.
 - OpenTelemetry Collector en `localhost:4317` y `localhost:4318`.
+- Prometheus en `localhost:9090`.
+- Grafana en `localhost:3000`.
 
 Comando:
 
 ```bash
 docker compose up -d
 ```
+
+Servicios observados inicialmente:
+
+- `01-plataforma-soporte-bancario` en `localhost:8081`.
+- `03-event-driven-notification-hub` en `localhost:8083`.
+
+Prometheus scrapea `/actuator/prometheus` y Grafana provisiona el dashboard `Proyecto2027 Overview`.
 
 ## Definition of Done tecnica
 

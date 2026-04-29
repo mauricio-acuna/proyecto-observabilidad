@@ -43,6 +43,34 @@ services:
     volumes:
       - ./desarrollo/02-observability-control-plane/otel-collector-config.yml:/etc/otel-collector-config.yml:ro
 
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: proyecto2027-prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=7d"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./desarrollo/02-observability-control-plane/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    container_name: proyecto2027-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: proyecto2027
+      GF_SECURITY_ADMIN_PASSWORD: proyecto2027
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./desarrollo/02-observability-control-plane/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./desarrollo/02-observability-control-plane/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+
 volumes:
   postgres-data:
   rabbitmq-data:
+  prometheus-data:
+  grafana-data:

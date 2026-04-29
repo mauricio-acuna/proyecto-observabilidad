@@ -72,3 +72,19 @@ Componentes:
 - Guia de instrumentacion.
 - Ejemplo aplicado sobre la plataforma de soporte bancario.
 
+## Implementacion actual
+
+El repositorio incluye una primera ruta operativa de observabilidad local:
+
+- OpenTelemetry Collector en `localhost:4317` y `localhost:4318`.
+- Prometheus en `localhost:9090`.
+- Grafana en `localhost:3000`.
+- Datasource Prometheus provisionado automaticamente.
+- Dashboard `Proyecto2027 Overview` versionado en `grafana/dashboards`.
+
+Servicios instrumentados inicialmente:
+
+- `01-plataforma-soporte-bancario` en `localhost:8081`.
+- `03-event-driven-notification-hub` en `localhost:8083`.
+
+Los servicios exponen metricas en `/actuator/prometheus` y exportan trazas por OTLP HTTP al collector.

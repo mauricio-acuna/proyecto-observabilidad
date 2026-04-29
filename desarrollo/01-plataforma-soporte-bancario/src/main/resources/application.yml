@@ -24,6 +24,9 @@ app:
       enabled: ${APP_OUTBOX_RELAY_ENABLED:true}
       fixed-delay-ms: ${APP_OUTBOX_RELAY_FIXED_DELAY_MS:5000}
 
+server:
+  port: ${SERVER_PORT:8081}
+
 management:
   endpoints:
     web:
@@ -32,6 +35,12 @@ management:
   metrics:
     tags:
       service: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: ${MANAGEMENT_TRACING_SAMPLING_PROBABILITY:1.0}
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:http://localhost:4318/v1/traces}
 
 logging:
   pattern:

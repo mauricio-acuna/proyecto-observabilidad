@@ -1,0 +1,10 @@
+apiVersion: 1
+
+providers:
+  - name: Proyecto2027
+    folder: Proyecto2027
+    type: file
+    disableDeletion: true
+    editable: false
+    options:
+      path: /var/lib/grafana/dashboards
