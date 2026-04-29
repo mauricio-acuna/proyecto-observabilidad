@@ -23,7 +23,8 @@ Esto permite demostrar una ruta completa desde codigo instrumentado hasta visual
 
 ## SLI/SLO
 
-La siguiente evolucion del proyecto es asociar cada servicio a SLI/SLO y reglas de alerta.
+Se agregaron SLIs/SLOs iniciales para error rate, latencia HTTP y dead letters.
+Las reglas Prometheus y el runbook permiten explicar como pasar de "tengo metricas" a "se que accion tomar".
 
 ## Conceptos del perfil que cubre
 

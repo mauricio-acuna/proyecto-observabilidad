@@ -53,6 +53,7 @@ services:
       - "9090:9090"
     volumes:
       - ./desarrollo/02-observability-control-plane/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./desarrollo/02-observability-control-plane/prometheus/rules:/etc/prometheus/rules:ro
       - prometheus-data:/prometheus
 
   grafana:

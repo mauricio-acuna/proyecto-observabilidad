@@ -81,6 +81,8 @@ El repositorio incluye una primera ruta operativa de observabilidad local:
 - Grafana en `localhost:3000`.
 - Datasource Prometheus provisionado automaticamente.
 - Dashboard `Proyecto2027 Overview` versionado en `grafana/dashboards`.
+- Reglas de alerta Prometheus en `prometheus/rules`.
+- Runbook inicial en `docs/SLI-SLO-RUNBOOK.md`.
 
 Servicios instrumentados inicialmente:
 

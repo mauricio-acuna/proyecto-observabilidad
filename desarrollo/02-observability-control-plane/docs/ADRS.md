@@ -35,4 +35,21 @@ Prometheus encaja bien con metricas por pull y alertado. OTLP mantiene trazas de
 
 - Los servicios deben tener puertos distintos cuando corren en local.
 - El dashboard se versiona con el repositorio.
-- Falta agregar reglas SLI/SLO y un backend persistente de trazas.
+- Falta agregar un backend persistente de trazas.
+
+## ADR-004: Definir SLI/SLO y alertas accionables
+
+### Decision
+
+Agregar reglas Prometheus para error rate, latencia HTTP y dead letters del notification hub.
+Documentar el runbook asociado en `docs/SLI-SLO-RUNBOOK.md`.
+
+### Motivo
+
+Una alerta util debe indicar una condicion observable y una accion esperada. Sin runbook, el dashboard solo muestra sintomas.
+
+### Consecuencias
+
+- El proyecto puede defender criterios iniciales de operacion y respuesta.
+- Las alertas son simples y locales; deben calibrarse con datos reales de performance.
+- Falta integrar Alertmanager o un canal de notificacion real.

@@ -1,0 +1,39 @@
+groups:
+  - name: proyecto2027-service-slo
+    rules:
+      - alert: Proyecto2027HighHttpErrorRate
+        expr: |
+          (
+            sum by (service) (rate(http_server_requests_seconds_count{status=~"5.."}[5m]))
+            /
+            sum by (service) (rate(http_server_requests_seconds_count[5m]))
+          ) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High HTTP 5xx error rate for {{ $labels.service }}"
+          description: "{{ $labels.service }} has more than 5% HTTP 5xx responses over the last 5 minutes."
+
+      - alert: Proyecto2027HighHttpLatency
+        expr: |
+          (
+            sum by (service) (rate(http_server_requests_seconds_sum[5m]))
+            /
+            sum by (service) (rate(http_server_requests_seconds_count[5m]))
+          ) > 0.75
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High average HTTP latency for {{ $labels.service }}"
+          description: "{{ $labels.service }} average HTTP latency is above 750ms over the last 10 minutes."
+
+      - alert: Proyecto2027NotificationDeadLetters
+        expr: notification_hub_dead_letter_events_total > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Notification hub has dead-letter events"
+          description: "The notification hub has persisted one or more dead-letter events. Inspect /api/notifications/operations/snapshot and the dead_letter_events table."
