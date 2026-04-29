@@ -20,3 +20,34 @@ El gateway garantiza que toda request tenga `X-Correlation-Id`.
 
 Sin contexto compartido, la trazabilidad entre servicios se rompe.
 
+## ADR-003: Aplicar rate limiting distribuido con Redis
+
+### Decision
+
+Usar `RequestRateLimiter` de Spring Cloud Gateway respaldado por Redis.
+La clave de rate limiting se resuelve por usuario autenticado, `X-Client-Id`, IP remota o `anonymous`.
+
+### Motivo
+
+El rate limiting debe funcionar aunque el gateway escale horizontalmente. Redis evita que cada instancia tenga contadores aislados.
+
+### Consecuencias
+
+- Requiere Redis local o gestionado.
+- Permite responder 429 antes de cargar servicios internos.
+- Falta agregar pruebas de integracion del filtro completo contra Redis.
+
+## ADR-004: Parametrizar issuer OIDC
+
+### Decision
+
+Configurar `issuer-uri` por variable `APP_OIDC_ISSUER_URI`, con Keycloak local como valor por defecto.
+
+### Motivo
+
+Permite cambiar entre Keycloak local, mock OIDC o proveedor real sin tocar codigo.
+
+### Consecuencias
+
+- El gateway queda listo para validar JWT reales.
+- Falta versionar/importar un realm local de Keycloak para demos reproducibles.

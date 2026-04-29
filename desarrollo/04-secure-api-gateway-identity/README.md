@@ -51,6 +51,24 @@ Componentes:
 - `customer-service`
 - `ticket-service`
 
+## Configuracion local actual
+
+- Gateway en `localhost:8080`.
+- Redis rate limiting en `localhost:6379`.
+- Keycloak local en `localhost:8089`.
+- Issuer OIDC por defecto: `http://localhost:8089/realms/proyecto2027`.
+- Ruta principal: `/support/**` hacia `01-plataforma-soporte-bancario`.
+
+Variables utiles:
+
+```bash
+APP_REDIS_HOST=localhost
+APP_REDIS_PORT=6379
+APP_OIDC_ISSUER_URI=http://localhost:8089/realms/proyecto2027
+APP_RATE_LIMIT_REPLENISH_RATE=10
+APP_RATE_LIMIT_BURST_CAPACITY=20
+```
+
 ## Que se puede defender en entrevista
 
 - Por que centralizar ciertas politicas en gateway.
@@ -68,4 +86,3 @@ Componentes:
 - Tests con WireMock.
 - Dashboard de trafico por status.
 - ADR de seguridad.
-

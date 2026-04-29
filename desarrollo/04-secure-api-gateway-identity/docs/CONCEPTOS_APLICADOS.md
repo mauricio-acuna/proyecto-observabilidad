@@ -14,7 +14,8 @@ Centraliza entrada, seguridad y propagacion de contexto.
 
 ## Rate limiting
 
-Siguiente paso: agregar Redis Rate Limiter de Spring Cloud Gateway.
+Se usa `RequestRateLimiter` de Spring Cloud Gateway con Redis.
+La clave se resuelve por principal autenticado, header `X-Client-Id`, IP remota o `anonymous`.
 
 ## Conceptos del perfil que cubre
 
@@ -25,4 +26,4 @@ Siguiente paso: agregar Redis Rate Limiter de Spring Cloud Gateway.
 - Observabilidad.
 - Propagacion de contexto.
 - Arquitectura de microservicios.
-
+- Rate limiting distribuido.

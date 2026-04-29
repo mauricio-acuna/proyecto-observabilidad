@@ -36,7 +36,7 @@ BUILD SUCCESSFUL
 
 Tests actuales:
 
-- 20 tests ejecutados.
+- 22 tests ejecutados.
 - 3 tests de integracion Testcontainers preparados y omitidos cuando Docker no esta disponible.
 - 12 proyectos con compilacion verificada.
 - 12 proyectos con al menos un test.

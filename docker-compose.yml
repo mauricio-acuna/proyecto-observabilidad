@@ -33,6 +33,29 @@ services:
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
 
+  redis:
+    image: redis:7.2-alpine
+    container_name: proyecto2027-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: proyecto2027-keycloak
+    command: ["start-dev"]
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8089:8080"
+
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.99.0
     container_name: proyecto2027-otel-collector
@@ -73,5 +96,6 @@ services:
 volumes:
   postgres-data:
   rabbitmq-data:
+  redis-data:
   prometheus-data:
   grafana-data:

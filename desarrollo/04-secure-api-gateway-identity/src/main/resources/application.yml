@@ -1,6 +1,15 @@
 spring:
   application:
     name: secure-api-gateway
+  data:
+    redis:
+      host: ${APP_REDIS_HOST:localhost}
+      port: ${APP_REDIS_PORT:6379}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${APP_OIDC_ISSUER_URI:http://localhost:8089/realms/proyecto2027}
   cloud:
     gateway:
       routes:
@@ -10,8 +19,30 @@ spring:
             - Path=/support/**
           filters:
             - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: ${APP_RATE_LIMIT_REPLENISH_RATE:10}
+                redis-rate-limiter.burstCapacity: ${APP_RATE_LIMIT_BURST_CAPACITY:20}
+                redis-rate-limiter.requestedTokens: 1
+                key-resolver: "#{@clientKeyResolver}"
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      service: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: ${MANAGEMENT_TRACING_SAMPLING_PROBABILITY:1.0}
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:http://localhost:4318/v1/traces}
+
+server:
+  port: ${SERVER_PORT:8080}
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
