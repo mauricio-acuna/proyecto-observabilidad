@@ -35,7 +35,8 @@ El rate limiting debe funcionar aunque el gateway escale horizontalmente. Redis 
 
 - Requiere Redis local o gestionado.
 - Permite responder 429 antes de cargar servicios internos.
-- Falta agregar pruebas de integracion del filtro completo contra Redis.
+- El comportamiento 429 queda cubierto con prueba WebFlux y rate limiter simulado.
+- Falta agregar prueba end-to-end contra Redis real.
 
 ## ADR-004: Parametrizar issuer OIDC
 
@@ -51,4 +52,5 @@ Permite cambiar entre Keycloak local, mock OIDC o proveedor real sin tocar codig
 
 - El gateway queda listo para validar JWT reales.
 - El realm local de Keycloak queda versionado para demos reproducibles.
-- Falta agregar tests WebFlux de 401/403/429 contra la configuracion completa.
+- La configuracion de seguridad queda cubierta con tests WebFlux de 401 y 403.
+- Falta validar end-to-end contra Keycloak local.

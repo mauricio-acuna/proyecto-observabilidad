@@ -19,22 +19,22 @@ La carpeta `desarrollo` ya contiene una primera base desarrollable para los 12 p
 Comando ejecutado:
 
 ```bash
-gradle clean test --console=plain
+gradle clean test jacocoTestReport --console=plain
 ```
 
 Resultado:
 
 ```text
 BUILD SUCCESSFUL
-66 actionable tasks: 66 executed
+67 actionable tasks: 57 executed, 10 up-to-date
 ```
 
 Cobertura actual:
 
 - 12 proyectos compilados.
 - 12 proyectos con al menos un test unitario.
-- 25 tests detectados.
-- 22 tests ejecutados.
+- 27 tests detectados.
+- 24 tests ejecutados.
 - 3 tests de integracion Testcontainers omitidos porque Docker no esta disponible en este entorno.
 - 0 fallos.
 - 0 errores.
@@ -48,7 +48,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 | 01 Plataforma soporte bancario | Dominio, use cases, REST, Prometheus/OTLP tracing, repositorios JPA, migraciones Flyway, outbox persistente, relay RabbitMQ y tests Testcontainers preparados | Ejecutar integracion con Docker |
 | 02 Observability control plane | Politicas de telemetria, collector config, Prometheus, Grafana, dashboard inicial, reglas SLI/SLO y runbook | Agregar backend persistente de trazas |
 | 03 Event-driven notification hub | Consumidor idempotente, sender desacoplado, Prometheus/OTLP tracing, listener RabbitMQ, retry, DLQ, processed events persistentes, intentos/dead letters auditables, snapshot operativo y metricas Micrometer | Validar flujo completo con Docker |
-| 04 Secure API gateway identity | Gateway, JWT resource server, issuer OIDC configurable, realm Keycloak versionado, Redis rate limiting, correlation id y observabilidad | Agregar tests 401/403/429 |
+| 04 Secure API gateway identity | Gateway, JWT resource server, issuer OIDC configurable, realm Keycloak versionado, Redis rate limiting, correlation id, observabilidad y tests 401/403/429 | Validar flujo end-to-end con Keycloak y Redis locales |
 | 05 FinOps cloud cost guardian | Analisis de costos simulado y recomendaciones | Integrar AWS Cost Explorer con adapter real |
 | 06 RAG knowledge assistant | Pipeline RAG conceptual con puertos de vector search y LLM | Agregar pgvector/Qdrant y evaluacion de respuestas |
 | 07 Incident response runbook system | Dominio de incidentes y API | Agregar runbooks, postmortems y SLOs |

@@ -59,6 +59,7 @@ Componentes:
 - Issuer OIDC por defecto: `http://localhost:8089/realms/proyecto2027`.
 - Realm importado desde `keycloak/proyecto2027-realm.json`.
 - Ruta principal: `/support/**` hacia `01-plataforma-soporte-bancario`.
+- La ruta `/support/**` requiere `ROLE_support_user` o `ROLE_support_admin`.
 
 Variables utiles:
 
@@ -95,6 +96,7 @@ curl -X POST http://localhost:8089/realms/proyecto2027/protocol/openid-connect/t
 - Gateway funcional.
 - Configuracion de seguridad.
 - Rate limiting.
+- Tests WebFlux para 401, 403 y 429.
 - Tests con WireMock.
 - Dashboard de trafico por status.
 - ADR de seguridad.

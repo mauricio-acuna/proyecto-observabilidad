@@ -18,7 +18,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ, OpenTelemetry Collector, Prometheus y Grafana; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
 | Sin performance ejecutada | No hay baseline de latencia/throughput | Agregar k6/Gatling y escenarios por API |
 | Observabilidad operativa inicial | Servicios 01 y 03 exponen Prometheus, exportan trazas OTLP y tienen dashboard, reglas SLI/SLO y runbook inicial | Validar con Docker local y agregar backend persistente de trazas |
-| Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable, realm Keycloak versionado y rate limiting Redis; faltan pruebas 401/403/429 | Agregar tests de seguridad WebFlux |
+| Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable, realm Keycloak versionado, rate limiting Redis y pruebas WebFlux de 401/403/429 | Validar end-to-end con Keycloak y Redis locales |
 | IA simulada | No llama proveedor real | Agregar adapter real y WireMock para pruebas |
 
 ## Sprint 1: estabilizacion tecnica

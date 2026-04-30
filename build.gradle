@@ -117,6 +117,7 @@ project(':desarrollo:04-secure-api-gateway-identity') {
         implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
         implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
         implementation 'org.springframework.boot:spring-boot-starter-security'
+        testImplementation 'org.springframework.security:spring-security-test'
     }
 }
 

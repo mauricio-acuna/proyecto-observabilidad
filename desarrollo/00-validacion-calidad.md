@@ -31,16 +31,18 @@ El comando fue ejecutado correctamente y el resultado fue:
 
 ```text
 BUILD SUCCESSFUL
-54 actionable tasks: 54 executed
+67 actionable tasks: 57 executed, 10 up-to-date
 ```
 
 Tests actuales:
 
-- 22 tests ejecutados.
+- 24 tests ejecutados.
+- 27 tests detectados.
 - 3 tests de integracion Testcontainers preparados y omitidos cuando Docker no esta disponible.
 - 12 proyectos con compilacion verificada.
 - 12 proyectos con al menos un test.
 - Tests de integracion reales agregados para persistencia PostgreSQL y outbox del proyecto 01.
+- Tests WebFlux agregados para respuestas 401, 403 y 429 del gateway.
 - Sin pruebas de performance ejecutadas todavia.
 
 ## CI
