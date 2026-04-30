@@ -56,8 +56,11 @@ Workflow:
 El CI usa JDK 21 y ejecuta:
 
 ```bash
-gradle clean test
+gradle clean test jacocoTestReport --console=plain
+docker compose config
 ```
+
+Tambien publica los reportes JaCoCo como artifact de GitHub Actions.
 
 ## Nota sobre Java local
 
