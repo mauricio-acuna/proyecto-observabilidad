@@ -1,6 +1,10 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
+const baseUrl = __ENV.BASE_URL || 'http://localhost:8081';
+const pathPrefix = __ENV.PATH_PREFIX || '';
+const bearerToken = __ENV.TOKEN || '';
+
 export const options = {
   vus: 5,
   duration: '30s',
@@ -11,6 +15,7 @@ export const options = {
 };
 
 export default function () {
+  const correlationId = `k6-support-${__VU}-${__ITER}`;
   const customerPayload = JSON.stringify({
     documentNumber: `DOC-${__VU}-${__ITER}`,
     fullName: 'Mauricio Acuna',
@@ -20,13 +25,15 @@ export default function () {
   const params = {
     headers: {
       'Content-Type': 'application/json',
-      'X-Correlation-Id': `k6-${__VU}-${__ITER}`,
+      'X-Correlation-Id': correlationId,
+      ...(bearerToken ? { Authorization: `Bearer ${bearerToken}` } : {}),
     },
   };
 
-  const customerResponse = http.post('http://localhost:8080/api/customers', customerPayload, params);
+  const customerResponse = http.post(`${baseUrl}${pathPrefix}/api/customers`, customerPayload, params);
   check(customerResponse, {
     'customer created': (res) => res.status === 201,
+    'customer response has body': (res) => Boolean(res.body),
   });
 
   if (customerResponse.status === 201) {
@@ -38,7 +45,7 @@ export default function () {
       priority: 'HIGH',
     });
 
-    const ticketResponse = http.post('http://localhost:8080/api/tickets', ticketPayload, params);
+    const ticketResponse = http.post(`${baseUrl}${pathPrefix}/api/tickets`, ticketPayload, params);
     check(ticketResponse, {
       'ticket created': (res) => res.status === 201,
     });

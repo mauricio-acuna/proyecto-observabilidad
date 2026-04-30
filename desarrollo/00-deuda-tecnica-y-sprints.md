@@ -16,7 +16,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Persistencia y eventos 01 -> 03 | Adapter JPA, Flyway, outbox, relay RabbitMQ, consumer, retry, DLQ, processed events e intentos persistentes agregados; falta ejecutar integracion con Docker local | Validar flujo completo con Docker disponible y agregar metricas de backlog |
 | Pocos tests por proyecto | Valida solo reglas centrales | Ampliar unit tests, integration tests y controller tests |
 | Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ, OpenTelemetry Collector, Prometheus y Grafana; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
-| Sin performance ejecutada | No hay baseline de latencia/throughput | Agregar k6/Gatling y escenarios por API |
+| Sin performance ejecutada | Hay scripts k6 para soporte bancario, notification hub y gateway, pero aun no hay medicion real | Levantar servicios locales y capturar baseline p95 |
 | Observabilidad operativa inicial | Servicios 01 y 03 exponen Prometheus, exportan trazas OTLP y tienen dashboard, reglas SLI/SLO y runbook inicial | Validar con Docker local y agregar backend persistente de trazas |
 | Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable, realm Keycloak versionado, rate limiting Redis y pruebas WebFlux de 401/403/429 | Validar end-to-end con Keycloak y Redis locales |
 | IA simulada | No llama proveedor real | Agregar adapter real y WireMock para pruebas |
@@ -109,7 +109,7 @@ Objetivo:
 
 Entregables:
 
-- Scripts k6.
+- Scripts k6 para APIs criticas.
 - Reporte de latencia p95.
 - Plan de tuning.
 

@@ -81,11 +81,17 @@ El objetivo profesional sigue siendo Java 21. Para evolucionar:
 
 ## Scripts de performance
 
-Se agrego una primera carpeta de referencia:
+Se agregaron scripts k6 de referencia:
 
 ```text
 desarrollo/performance/k6
 ```
+
+Escenarios disponibles:
+
+- soporte bancario directo o via gateway,
+- notification hub,
+- gateway con token JWT.
 
 Los scripts se deben ejecutar cuando los servicios esten levantados localmente.
 

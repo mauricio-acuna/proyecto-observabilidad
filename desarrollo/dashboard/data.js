@@ -2,27 +2,27 @@ window.dashboardData = {
   projects: [
     {
       name: "01 Plataforma soporte bancario",
-      status: "Compila + test",
-      demonstrates: "Java/Spring, REST, eventos, auditoria, observabilidad",
-      next: "PostgreSQL, Flyway, outbox real"
+      status: "Persistencia + eventos",
+      demonstrates: "Java/Spring, REST, PostgreSQL, outbox, RabbitMQ, observabilidad",
+      next: "Validar integracion con Docker"
     },
     {
       name: "02 Observability control plane",
-      status: "Compila + test",
-      demonstrates: "OpenTelemetry, politicas, cardinalidad, collector",
-      next: "Dashboards Grafana y SLOs"
+      status: "Stack observable",
+      demonstrates: "OpenTelemetry, Prometheus, Grafana, SLI/SLO, runbooks",
+      next: "Backend persistente de trazas"
     },
     {
       name: "03 Event-driven notification hub",
-      status: "Compila + test",
-      demonstrates: "Idempotencia, eventos, consumidores, adapters",
-      next: "Broker real, retries y DLQ"
+      status: "Eventos + DLQ",
+      demonstrates: "Idempotencia, RabbitMQ, retry, DLQ, metricas operativas",
+      next: "Validar flujo completo con Docker"
     },
     {
       name: "04 Secure API gateway identity",
-      status: "Compila + test",
-      demonstrates: "Gateway, JWT, OAuth2/OIDC, correlation id",
-      next: "Keycloak y rate limiting"
+      status: "Gateway seguro",
+      demonstrates: "Gateway, JWT, OAuth2/OIDC, Redis rate limiting, 401/403/429",
+      next: "Validar end-to-end con Keycloak"
     },
     {
       name: "05 FinOps cloud cost guardian",
@@ -76,12 +76,12 @@ window.dashboardData = {
   coverage: [
     ["Java/Spring backend", 100],
     ["Testing unitario", 70],
-    ["Observabilidad", 55],
-    ["Eventos e idempotencia", 45],
-    ["Seguridad", 35],
+    ["Observabilidad", 70],
+    ["Eventos e idempotencia", 65],
+    ["Seguridad", 55],
     ["Cloud/AWS/FinOps", 35],
     ["IA aplicada", 35],
-    ["Performance", 15]
+    ["Performance", 25]
   ],
   sprints: [
     ["Sprint 1", "Estabilizar build, JDK 21, JaCoCo y Docker Compose minimo."],
@@ -93,4 +93,3 @@ window.dashboardData = {
     ["Sprint 7", "Adapters IA reales, WireMock, tokens, costo y guardrails."]
   ]
 };
-

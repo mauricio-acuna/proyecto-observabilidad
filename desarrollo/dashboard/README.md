@@ -14,7 +14,7 @@ desarrollo/dashboard/index.html
 
 - Estado de build y tests.
 - Proyectos compilados.
-- Tests unitarios actuales.
+- Tests actuales.
 - Cobertura del stack profesional.
 - Dolor tecnico visible.
 - Deuda tecnica.
@@ -26,13 +26,12 @@ desarrollo/dashboard/index.html
 Los datos reflejan el estado validado con:
 
 ```bash
-gradle clean test --console=plain
+gradle clean test jacocoTestReport --console=plain
 ```
 
 Resultado:
 
 ```text
 BUILD SUCCESSFUL
-54 actionable tasks: 54 executed
+67 actionable tasks: 57 executed, 10 up-to-date
 ```
-

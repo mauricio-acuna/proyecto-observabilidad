@@ -31,13 +31,13 @@
         <span class="metric-note">Verificada con Gradle</span>
       </article>
       <article class="metric">
-        <span class="metric-label">Tests unitarios</span>
-        <strong>14</strong>
+        <span class="metric-label">Tests detectados</span>
+        <strong>27</strong>
         <span class="metric-note">0 fallos, 0 errores</span>
       </article>
       <article class="metric">
         <span class="metric-label">Tareas Gradle</span>
-        <strong>54</strong>
+        <strong>67</strong>
         <span class="metric-note">Ejecutadas correctamente</span>
       </article>
     </section>
@@ -52,14 +52,14 @@
         <p>
           El siguiente salto no es crear mas ideas, sino endurecer las existentes con
           integracion real: PostgreSQL, broker, Docker Compose, observabilidad completa,
-          seguridad y performance ejecutada.
+          seguridad y baseline de performance ejecutado.
         </p>
       </div>
       <div class="build-panel">
         <h3>Ultima Validacion</h3>
-        <pre><code>gradle clean test --console=plain
+        <pre><code>gradle clean test jacocoTestReport --console=plain
 BUILD SUCCESSFUL
-54 actionable tasks: 54 executed</code></pre>
+67 actionable tasks: 57 executed, 10 up-to-date</code></pre>
       </div>
     </section>
 
@@ -85,7 +85,7 @@ BUILD SUCCESSFUL
         </article>
         <article class="pain pain-medium">
           <h3>Performance no ejecutada</h3>
-          <p>Existe script k6 inicial. Aun falta levantar servicios y capturar baseline de latencia p95.</p>
+          <p>Existen scripts k6 para APIs criticas. Aun falta levantar servicios y capturar baseline de latencia p95.</p>
         </article>
       </div>
     </section>
@@ -127,4 +127,3 @@ BUILD SUCCESSFUL
   <script src="app.js"></script>
 </body>
 </html>
-
