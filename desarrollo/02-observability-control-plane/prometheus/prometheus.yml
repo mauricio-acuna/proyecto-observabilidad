@@ -11,6 +11,7 @@ scrape_configs:
     static_configs:
       - targets:
           - host.docker.internal:8080
+          - secure-api-gateway:8080
         labels:
           service: secure-api-gateway
 
@@ -19,6 +20,7 @@ scrape_configs:
     static_configs:
       - targets:
           - host.docker.internal:8081
+          - plataforma-soporte-bancario:8081
         labels:
           service: plataforma-soporte-bancario
 
@@ -27,5 +29,6 @@ scrape_configs:
     static_configs:
       - targets:
           - host.docker.internal:8083
+          - event-driven-notification-hub:8083
         labels:
           service: event-driven-notification-hub

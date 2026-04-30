@@ -31,7 +31,7 @@ El comando fue ejecutado correctamente y el resultado fue:
 
 ```text
 BUILD SUCCESSFUL
-67 actionable tasks: 57 executed, 10 up-to-date
+67 actionable tasks: 65 executed, 2 up-to-date
 ```
 
 Tests actuales:
@@ -97,7 +97,7 @@ Los scripts se deben ejecutar cuando los servicios esten levantados localmente.
 
 ## Infraestructura local
 
-El repositorio incluye un `docker-compose.yml` inicial para levantar dependencias compartidas:
+El repositorio incluye un `docker-compose.yml` para levantar dependencias compartidas:
 
 - PostgreSQL en `localhost:5432`.
 - RabbitMQ en `localhost:5672` y consola web en `localhost:15672`.
@@ -111,12 +111,21 @@ Comando:
 docker compose up -d
 ```
 
-Servicios observados inicialmente:
+Tambien incluye un perfil opcional para levantar las aplicaciones principales:
+
+```bash
+docker compose --profile apps up --build
+```
+
+Servicios de aplicacion:
 
 - `01-plataforma-soporte-bancario` en `localhost:8081`.
 - `03-event-driven-notification-hub` en `localhost:8083`.
+- `04-secure-api-gateway-identity` en `localhost:8080`.
 
 Prometheus scrapea `/actuator/prometheus` y Grafana provisiona el dashboard `Proyecto2027 Overview`.
+
+Nota: `docker compose config` no pudo ejecutarse en este entorno porque Docker no esta instalado.
 
 ## Definition of Done tecnica
 

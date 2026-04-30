@@ -33,5 +33,5 @@ Resultado:
 
 ```text
 BUILD SUCCESSFUL
-67 actionable tasks: 57 executed, 10 up-to-date
+67 actionable tasks: 65 executed, 2 up-to-date
 ```

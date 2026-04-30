@@ -1,0 +1,19 @@
+FROM gradle:8.10-jdk17 AS build
+
+ARG GRADLE_PROJECT
+ARG MODULE_DIR
+WORKDIR /workspace
+
+COPY . .
+RUN gradle ":${GRADLE_PROJECT}:bootJar" --no-daemon --console=plain
+
+FROM eclipse-temurin:17-jre
+
+ARG MODULE_DIR
+WORKDIR /app
+
+COPY --from=build /workspace/${MODULE_DIR}/build/libs/*.jar /app/app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]

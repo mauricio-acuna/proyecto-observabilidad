@@ -58,6 +58,90 @@ services:
     volumes:
       - ./desarrollo/04-secure-api-gateway-identity/keycloak:/opt/keycloak/data/import:ro
 
+  plataforma-soporte-bancario:
+    profiles: ["apps"]
+    build:
+      context: .
+      dockerfile: Dockerfile.spring-app
+      args:
+        GRADLE_PROJECT: desarrollo:01-plataforma-soporte-bancario
+        MODULE_DIR: desarrollo/01-plataforma-soporte-bancario
+    container_name: proyecto2027-plataforma-soporte-bancario
+    environment:
+      SERVER_PORT: 8081
+      APP_DATASOURCE_URL: jdbc:postgresql://postgres:5432/proyecto2027
+      APP_DATASOURCE_USERNAME: proyecto2027
+      APP_DATASOURCE_PASSWORD: proyecto2027
+      APP_RABBITMQ_HOST: rabbitmq
+      APP_RABBITMQ_USERNAME: proyecto2027
+      APP_RABBITMQ_PASSWORD: proyecto2027
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    ports:
+      - "8081:8081"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      otel-collector:
+        condition: service_started
+
+  event-driven-notification-hub:
+    profiles: ["apps"]
+    build:
+      context: .
+      dockerfile: Dockerfile.spring-app
+      args:
+        GRADLE_PROJECT: desarrollo:03-event-driven-notification-hub
+        MODULE_DIR: desarrollo/03-event-driven-notification-hub
+    container_name: proyecto2027-event-driven-notification-hub
+    environment:
+      SERVER_PORT: 8083
+      APP_DATASOURCE_URL: jdbc:postgresql://postgres:5432/proyecto2027
+      APP_DATASOURCE_USERNAME: proyecto2027
+      APP_DATASOURCE_PASSWORD: proyecto2027
+      APP_RABBITMQ_HOST: rabbitmq
+      APP_RABBITMQ_USERNAME: proyecto2027
+      APP_RABBITMQ_PASSWORD: proyecto2027
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    ports:
+      - "8083:8083"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      otel-collector:
+        condition: service_started
+
+  secure-api-gateway:
+    profiles: ["apps"]
+    build:
+      context: .
+      dockerfile: Dockerfile.spring-app
+      args:
+        GRADLE_PROJECT: desarrollo:04-secure-api-gateway-identity
+        MODULE_DIR: desarrollo/04-secure-api-gateway-identity
+    container_name: proyecto2027-secure-api-gateway
+    environment:
+      SERVER_PORT: 8080
+      APP_REDIS_HOST: redis
+      APP_REDIS_PORT: 6379
+      APP_OIDC_ISSUER_URI: http://keycloak:8080/realms/proyecto2027
+      APP_SUPPORT_PLATFORM_URI: http://plataforma-soporte-bancario:8081
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    ports:
+      - "8080:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+      keycloak:
+        condition: service_started
+      plataforma-soporte-bancario:
+        condition: service_started
+      otel-collector:
+        condition: service_started
+
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.99.0
     container_name: proyecto2027-otel-collector

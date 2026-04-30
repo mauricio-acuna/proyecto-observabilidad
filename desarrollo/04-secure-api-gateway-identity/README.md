@@ -60,6 +60,7 @@ Componentes:
 - Realm importado desde `keycloak/proyecto2027-realm.json`.
 - Ruta principal: `/support/**` hacia `01-plataforma-soporte-bancario`.
 - La ruta `/support/**` requiere `ROLE_support_user` o `ROLE_support_admin`.
+- En Docker Compose, el gateway usa `APP_SUPPORT_PLATFORM_URI` para enrutar hacia el servicio de soporte dentro de la red.
 
 Variables utiles:
 
@@ -67,6 +68,7 @@ Variables utiles:
 APP_REDIS_HOST=localhost
 APP_REDIS_PORT=6379
 APP_OIDC_ISSUER_URI=http://localhost:8089/realms/proyecto2027
+APP_SUPPORT_PLATFORM_URI=http://localhost:8081
 APP_RATE_LIMIT_REPLENISH_RATE=10
 APP_RATE_LIMIT_BURST_CAPACITY=20
 ```

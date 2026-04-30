@@ -88,5 +88,7 @@ Servicios instrumentados inicialmente:
 
 - `01-plataforma-soporte-bancario` en `localhost:8081`.
 - `03-event-driven-notification-hub` en `localhost:8083`.
+- `04-secure-api-gateway-identity` en `localhost:8080`.
 
 Los servicios exponen metricas en `/actuator/prometheus` y exportan trazas por OTLP HTTP al collector.
+Prometheus esta preparado para scrapear servicios ejecutados en el host y servicios levantados dentro de `docker compose --profile apps`.

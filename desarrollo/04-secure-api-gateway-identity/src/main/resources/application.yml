@@ -14,7 +14,7 @@ spring:
     gateway:
       routes:
         - id: support-platform
-          uri: http://localhost:8081
+          uri: ${APP_SUPPORT_PLATFORM_URI:http://localhost:8081}
           predicates:
             - Path=/support/**
           filters:

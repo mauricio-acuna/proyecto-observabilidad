@@ -15,7 +15,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Quality gate de cobertura inicial | JaCoCo ya genera reportes por subproyecto, falta umbral minimo | Definir umbral por modulo cuando aumente la cobertura |
 | Persistencia y eventos 01 -> 03 | Adapter JPA, Flyway, outbox, relay RabbitMQ, consumer, retry, DLQ, processed events e intentos persistentes agregados; falta ejecutar integracion con Docker local | Validar flujo completo con Docker disponible y agregar metricas de backlog |
 | Pocos tests por proyecto | Valida solo reglas centrales | Ampliar unit tests, integration tests y controller tests |
-| Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ, OpenTelemetry Collector, Prometheus y Grafana; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
+| Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ, Redis, Keycloak, OpenTelemetry Collector, Prometheus, Grafana y servicios de aplicacion bajo perfil `apps` | Validar ejecucion local cuando Docker este disponible |
 | Sin performance ejecutada | Hay scripts k6 para soporte bancario, notification hub y gateway, pero aun no hay medicion real | Levantar servicios locales y capturar baseline p95 |
 | Observabilidad operativa inicial | Servicios 01 y 03 exponen Prometheus, exportan trazas OTLP y tienen dashboard, reglas SLI/SLO y runbook inicial | Validar con Docker local y agregar backend persistente de trazas |
 | Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable, realm Keycloak versionado, rate limiting Redis y pruebas WebFlux de 401/403/429 | Validar end-to-end con Keycloak y Redis locales |
@@ -28,7 +28,7 @@ Objetivo:
 - Mantener `gradle clean test` en verde.
 - Agregar JDK 21.
 - Decidir build oficial: Gradle o Maven.
-- Docker Compose inicial agregado.
+- Docker Compose inicial agregado con dependencias y perfil `apps`.
 - JaCoCo agregado; falta definir umbral minimo.
 
 Entregables:
