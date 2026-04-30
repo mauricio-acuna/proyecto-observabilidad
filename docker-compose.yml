@@ -49,12 +49,14 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:24.0
     container_name: proyecto2027-keycloak
-    command: ["start-dev"]
+    command: ["start-dev", "--import-realm"]
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     ports:
       - "8089:8080"
+    volumes:
+      - ./desarrollo/04-secure-api-gateway-identity/keycloak:/opt/keycloak/data/import:ro
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.99.0

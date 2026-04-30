@@ -18,7 +18,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ, OpenTelemetry Collector, Prometheus y Grafana; faltan servicios de aplicacion | Agregar servicios de aplicacion cuando tengan adapters reales |
 | Sin performance ejecutada | No hay baseline de latencia/throughput | Agregar k6/Gatling y escenarios por API |
 | Observabilidad operativa inicial | Servicios 01 y 03 exponen Prometheus, exportan trazas OTLP y tienen dashboard, reglas SLI/SLO y runbook inicial | Validar con Docker local y agregar backend persistente de trazas |
-| Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable y rate limiting Redis; faltan realm reproducible y pruebas 401/403/429 | Agregar realm Keycloak versionado y tests de seguridad |
+| Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable, realm Keycloak versionado y rate limiting Redis; faltan pruebas 401/403/429 | Agregar tests de seguridad WebFlux |
 | IA simulada | No llama proveedor real | Agregar adapter real y WireMock para pruebas |
 
 ## Sprint 1: estabilizacion tecnica
@@ -88,7 +88,7 @@ Entregables:
 Objetivo:
 
 - Levantar Keycloak o mock OIDC.
-- Keycloak local agregado a Docker Compose.
+- Keycloak local y realm versionado agregados a Docker Compose.
 - Rate limiting Redis agregado.
 - Proteger endpoints principales.
 

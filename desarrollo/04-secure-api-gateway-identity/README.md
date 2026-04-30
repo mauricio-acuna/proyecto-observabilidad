@@ -57,6 +57,7 @@ Componentes:
 - Redis rate limiting en `localhost:6379`.
 - Keycloak local en `localhost:8089`.
 - Issuer OIDC por defecto: `http://localhost:8089/realms/proyecto2027`.
+- Realm importado desde `keycloak/proyecto2027-realm.json`.
 - Ruta principal: `/support/**` hacia `01-plataforma-soporte-bancario`.
 
 Variables utiles:
@@ -67,6 +68,17 @@ APP_REDIS_PORT=6379
 APP_OIDC_ISSUER_URI=http://localhost:8089/realms/proyecto2027
 APP_RATE_LIMIT_REPLENISH_RATE=10
 APP_RATE_LIMIT_BURST_CAPACITY=20
+```
+
+Token demo:
+
+```bash
+curl -X POST http://localhost:8089/realms/proyecto2027/protocol/openid-connect/token \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=password" \
+  -d "client_id=proyecto2027-gateway" \
+  -d "username=demo-user" \
+  -d "password=demo123"
 ```
 
 ## Que se puede defender en entrevista

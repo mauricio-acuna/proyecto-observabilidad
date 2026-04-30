@@ -50,4 +50,5 @@ Permite cambiar entre Keycloak local, mock OIDC o proveedor real sin tocar codig
 ### Consecuencias
 
 - El gateway queda listo para validar JWT reales.
-- Falta versionar/importar un realm local de Keycloak para demos reproducibles.
+- El realm local de Keycloak queda versionado para demos reproducibles.
+- Falta agregar tests WebFlux de 401/403/429 contra la configuracion completa.

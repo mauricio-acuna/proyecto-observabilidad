@@ -1,0 +1,72 @@
+{
+  "realm": "proyecto2027",
+  "enabled": true,
+  "displayName": "Proyecto2027",
+  "roles": {
+    "realm": [
+      {
+        "name": "support_user",
+        "description": "Can access support platform APIs through the gateway"
+      },
+      {
+        "name": "support_admin",
+        "description": "Can administer support platform APIs through the gateway"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "proyecto2027-gateway",
+      "name": "Proyecto2027 Gateway Demo Client",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "redirectUris": [
+        "http://localhost:8080/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8080"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "demo-user",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "User",
+      "email": "demo-user@example.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "demo123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "support_user"
+      ]
+    },
+    {
+      "username": "demo-admin",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Admin",
+      "email": "demo-admin@example.com",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "support_admin"
+      ]
+    }
+  ]
+}
