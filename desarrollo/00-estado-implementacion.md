@@ -46,7 +46,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 | Proyecto | Estado actual | Proximo incremento recomendado |
 |---|---|---|
 | 01 Plataforma soporte bancario | Dominio, use cases, REST, Prometheus/OTLP tracing, repositorios JPA, migraciones Flyway, outbox persistente, relay RabbitMQ, Dockerfile reusable y tests Testcontainers preparados | Ejecutar integracion con Docker |
-| 02 Observability control plane | Politicas de telemetria, collector config, Prometheus, Grafana, dashboard inicial, reglas SLI/SLO, runbook y scrape de apps host/container | Agregar backend persistente de trazas |
+| 02 Observability control plane | Politicas de telemetria, collector config, Tempo, Prometheus, Grafana, dashboard inicial, reglas SLI/SLO, runbook y scrape de apps host/container | Validar trazas end-to-end con Docker |
 | 03 Event-driven notification hub | Consumidor idempotente, sender desacoplado, Prometheus/OTLP tracing, listener RabbitMQ, retry, DLQ, processed events persistentes, intentos/dead letters auditables, snapshot operativo, metricas Micrometer y Dockerfile reusable | Validar flujo completo con Docker |
 | 04 Secure API gateway identity | Gateway, JWT resource server, issuer OIDC configurable, realm Keycloak versionado, Redis rate limiting, correlation id, observabilidad y tests 401/403/429 | Validar flujo end-to-end con Keycloak y Redis locales |
 | 05 FinOps cloud cost guardian | Analisis de costos simulado y recomendaciones | Integrar AWS Cost Explorer con adapter real |

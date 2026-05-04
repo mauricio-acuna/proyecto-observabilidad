@@ -25,17 +25,17 @@ Permite filtrar, muestrear, transformar y enrutar sin acoplar las aplicaciones a
 ### Decision
 
 Los servicios exponen metricas Prometheus por `/actuator/prometheus` y exportan trazas por OTLP HTTP hacia el OpenTelemetry Collector.
-Prometheus y Grafana se provisionan desde `docker-compose.yml`.
+Prometheus, Tempo y Grafana se provisionan desde `docker-compose.yml`.
 
 ### Motivo
 
-Prometheus encaja bien con metricas por pull y alertado. OTLP mantiene trazas desacopladas del backend final y permite cambiar de debug exporter a Tempo/Jaeger/Cloud sin tocar los servicios.
+Prometheus encaja bien con metricas por pull y alertado. OTLP mantiene trazas desacopladas del backend final y permite cambiar de Tempo a Jaeger/Cloud sin tocar los servicios.
 
 ### Consecuencias
 
 - Los servicios deben tener puertos distintos cuando corren en local.
 - El dashboard se versiona con el repositorio.
-- Falta agregar un backend persistente de trazas.
+- Tempo conserva trazas locales por 24 horas para diagnostico y demos.
 
 ## ADR-004: Definir SLI/SLO y alertas accionables
 

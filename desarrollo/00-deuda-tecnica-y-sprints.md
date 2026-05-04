@@ -17,7 +17,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Pocos tests por proyecto | Valida solo reglas centrales | Ampliar unit tests, integration tests y controller tests |
 | Docker Compose global inicial | Ya existe compose para PostgreSQL, RabbitMQ, Redis, Keycloak, OpenTelemetry Collector, Prometheus, Grafana y servicios de aplicacion bajo perfil `apps` | Validar ejecucion local cuando Docker este disponible |
 | Sin performance ejecutada | Hay scripts k6 para soporte bancario, notification hub y gateway, pero aun no hay medicion real | Levantar servicios locales y capturar baseline p95 |
-| Observabilidad operativa inicial | Servicios 01 y 03 exponen Prometheus, exportan trazas OTLP y tienen dashboard, reglas SLI/SLO y runbook inicial | Validar con Docker local y agregar backend persistente de trazas |
+| Observabilidad operativa inicial | Servicios 01, 03 y 04 exponen Prometheus, exportan trazas OTLP, y el compose incluye Collector, Tempo, Prometheus, Grafana, reglas SLI/SLO y runbook inicial | Validar con Docker local y agregar correlacion trazas-dashboard |
 | Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable, realm Keycloak versionado, rate limiting Redis y pruebas WebFlux de 401/403/429 | Validar end-to-end con Keycloak y Redis locales |
 | IA simulada | No llama proveedor real | Agregar adapter real y WireMock para pruebas |
 

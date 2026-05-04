@@ -105,6 +105,7 @@ El repositorio incluye un `docker-compose.yml` para levantar dependencias compar
 - PostgreSQL en `localhost:5432`.
 - RabbitMQ en `localhost:5672` y consola web en `localhost:15672`.
 - OpenTelemetry Collector en `localhost:4317` y `localhost:4318`.
+- Tempo en `localhost:3200`.
 - Prometheus en `localhost:9090`.
 - Grafana en `localhost:3000`.
 

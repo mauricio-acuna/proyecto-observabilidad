@@ -9,8 +9,8 @@ window.dashboardData = {
     {
       name: "02 Observability control plane",
       status: "Stack observable",
-      demonstrates: "OpenTelemetry, Prometheus, Grafana, SLI/SLO, runbooks",
-      next: "Backend persistente de trazas"
+      demonstrates: "OpenTelemetry, Tempo, Prometheus, Grafana, SLI/SLO, runbooks",
+      next: "Validar trazas end-to-end"
     },
     {
       name: "03 Event-driven notification hub",
@@ -76,7 +76,7 @@ window.dashboardData = {
   coverage: [
     ["Java/Spring backend", 100],
     ["Testing unitario", 70],
-    ["Observabilidad", 70],
+    ["Observabilidad", 75],
     ["Eventos e idempotencia", 65],
     ["Seguridad", 55],
     ["Cloud/AWS/FinOps", 35],

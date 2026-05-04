@@ -79,7 +79,9 @@ El repositorio incluye una primera ruta operativa de observabilidad local:
 - OpenTelemetry Collector en `localhost:4317` y `localhost:4318`.
 - Prometheus en `localhost:9090`.
 - Grafana en `localhost:3000`.
+- Tempo en `localhost:3200`.
 - Datasource Prometheus provisionado automaticamente.
+- Datasource Tempo provisionado automaticamente.
 - Dashboard `Proyecto2027 Overview` versionado en `grafana/dashboards`.
 - Reglas de alerta Prometheus en `prometheus/rules`.
 - Runbook inicial en `docs/SLI-SLO-RUNBOOK.md`.
@@ -91,4 +93,5 @@ Servicios instrumentados inicialmente:
 - `04-secure-api-gateway-identity` en `localhost:8080`.
 
 Los servicios exponen metricas en `/actuator/prometheus` y exportan trazas por OTLP HTTP al collector.
+El collector mantiene un exporter `debug` para desarrollo local y reenvia trazas a Tempo por OTLP gRPC.
 Prometheus esta preparado para scrapear servicios ejecutados en el host y servicios levantados dentro de `docker compose --profile apps`.

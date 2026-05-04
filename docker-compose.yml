@@ -151,6 +151,20 @@ services:
       - "4318:4318"
     volumes:
       - ./desarrollo/02-observability-control-plane/otel-collector-config.yml:/etc/otel-collector-config.yml:ro
+    depends_on:
+      tempo:
+        condition: service_started
+
+  tempo:
+    image: grafana/tempo:2.4.1
+    container_name: proyecto2027-tempo
+    command: ["-config.file=/etc/tempo.yml"]
+    ports:
+      - "3200:3200"
+      - "4319:4317"
+    volumes:
+      - ./desarrollo/02-observability-control-plane/tempo/tempo.yml:/etc/tempo.yml:ro
+      - tempo-data:/var/tempo
 
   prometheus:
     image: prom/prometheus:v2.52.0
@@ -185,3 +199,4 @@ volumes:
   redis-data:
   prometheus-data:
   grafana-data:
+  tempo-data:
