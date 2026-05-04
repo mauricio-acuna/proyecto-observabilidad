@@ -36,7 +36,9 @@ Los controllers representan la API externa. La documentacion OpenAPI queda como 
 
 ## Outbox pattern
 
-El proyecto todavia publica eventos via log adapter. El siguiente paso es reemplazar `LoggingDomainEventPublisher` por un outbox persistente.
+El proyecto guarda eventos de dominio en `outbox_events` dentro de la misma transaccion del ticket.
+Un relay programado publica eventos `TicketCreated` hacia RabbitMQ en el exchange `support.events` y marca cada registro como `PUBLISHED` o `FAILED`.
+El adapter `LoggingDomainEventPublisher` queda disponible solo para el perfil `in-memory`.
 
 ## Observabilidad
 
@@ -44,7 +46,7 @@ Actuator y Micrometer quedan habilitados desde `application.yml`. Los logs inclu
 
 ## Testing
 
-El `pom.xml` incluye Spring Boot Test y Testcontainers para evolucionar hacia pruebas con PostgreSQL real.
+El build incluye Spring Boot Test, tests de caso de uso, tests del outbox/relay y Testcontainers preparado para validar PostgreSQL real cuando Docker este disponible.
 
 ## Conceptos del perfil que cubre
 
@@ -59,4 +61,3 @@ El `pom.xml` incluye Spring Boot Test y Testcontainers para evolucionar hacia pr
 - Auditoria.
 - Separacion de responsabilidades.
 - Diseno defendible en entrevistas senior.
-

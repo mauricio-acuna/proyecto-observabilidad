@@ -10,15 +10,15 @@ Cada evento se identifica con `eventId`, y el consumidor consulta si ya fue proc
 
 Los brokers pueden entregar duplicados. El consumidor debe ser seguro ante reintentos.
 
-## ADR-002: Simular broker con HTTP al inicio
+## ADR-002: Mantener entrada HTTP como canal manual
 
 ### Decision
 
-El primer corte usa un endpoint REST como entrada de eventos.
+El primer corte uso un endpoint REST como entrada de eventos. Con RabbitMQ ya agregado, el endpoint se mantiene como canal manual para pruebas y demos.
 
 ### Motivo
 
-Permite probar reglas de idempotencia antes de introducir Kafka, RabbitMQ o SQS.
+Permite probar reglas de idempotencia y reprocesar eventos controlados sin depender del broker.
 
 ## ADR-003: Consumir eventos desde RabbitMQ
 
@@ -36,7 +36,8 @@ El proyecto 01 ya publica eventos desde outbox hacia RabbitMQ. Este listener per
 - El contrato entre productor y consumidor queda basado en el payload `TicketCreated`.
 - La idempotencia sigue en la capa de aplicacion.
 - Retry policy y DLQ RabbitMQ quedan configurados.
-- Faltan persistencia de intentos, dashboard de backlog y prueba end-to-end con Docker local.
+- Persistencia de intentos, DLQ y metricas operativas quedan cubiertas.
+- Falta prueba end-to-end con Docker local.
 
 ## ADR-004: Persistir idempotencia e informacion operativa
 

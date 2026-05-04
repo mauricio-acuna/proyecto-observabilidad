@@ -6,11 +6,18 @@
 
 ## DLQ y retries
 
-El codigo actual modela el consumidor. La siguiente iteracion agrega retry/backoff y una tabla o cola `dead_letter_events`.
+El listener RabbitMQ usa retry/backoff configurado en Spring AMQP y enruta fallos a `notification.ticket-created.dlq`.
+Un listener de DLQ guarda payload, cola origen y motivo en `dead_letter_events` para auditoria.
 
 ## Event-driven architecture
 
-El controller HTTP simula entrada de eventos. Puede reemplazarse por Kafka, RabbitMQ o AWS SQS sin cambiar el caso de uso.
+RabbitMQ es la entrada asincrona principal para `ticket.created`.
+El controller HTTP queda como entrada manual para pruebas, demos y diagnostico, sin cambiar el caso de uso idempotente.
+
+## Operacion observable
+
+`NotificationOperationsController` expone un snapshot con procesados, intentos, enviados, fallidos y dead letters.
+`NotificationHubMetrics` publica gauges equivalentes para Prometheus.
 
 ## Conceptos del perfil que cubre
 
@@ -20,4 +27,3 @@ El controller HTTP simula entrada de eventos. Puede reemplazarse por Kafka, Rabb
 - Separacion puerto/adaptador.
 - Observabilidad de procesamiento.
 - Resiliencia.
-

@@ -16,21 +16,21 @@ Separar dominio, casos de uso, puertos e infraestructura.
 - Los adaptadores pueden reemplazarse por PostgreSQL, Kafka o AWS sin cambiar el caso de uso.
 - Hay mas archivos que en un CRUD simple, pero mejor conversacion tecnica.
 
-## ADR-002: Empezar con adaptadores in-memory
+## ADR-002: Mantener adaptadores in-memory solo como perfil alternativo
 
 ### Contexto
 
-La prioridad inicial es mostrar arquitectura y flujo funcional.
+La prioridad inicial fue mostrar arquitectura y flujo funcional. Luego el proyecto evoluciono a PostgreSQL, Flyway y outbox persistente.
 
 ### Decision
 
-Usar repositorios in-memory y adapters de log.
+Usar repositorios JPA por defecto y mantener repositorios/adapters in-memory solo bajo el perfil `in-memory`.
 
 ### Consecuencias
 
-- Permite avanzar rapido.
-- No reemplaza la persistencia real.
-- El siguiente paso sera PostgreSQL + Flyway + outbox.
+- Permite demos rapidas sin infraestructura cuando se activa `in-memory`.
+- El camino productivo usa PostgreSQL, Flyway y outbox.
+- Evita que el caso de uso dependa de JPA o RabbitMQ.
 
 ## ADR-003: Publicar evento al abrir ticket
 
@@ -64,7 +64,7 @@ Los repositorios in-memory quedan disponibles solo con el perfil `in-memory`.
 - Los casos de uso no cambian al mover la persistencia a PostgreSQL.
 - El esquema queda versionado y validado por `ddl-auto: validate`.
 - Los tests de integracion con Testcontainers quedan preparados para ejecutarse cuando Docker este disponible.
-- El siguiente paso natural es persistir eventos con outbox en la misma transaccion.
+- La persistencia de eventos queda resuelta con `outbox_events` y relay RabbitMQ.
 
 ## ADR-005: Guardar eventos en outbox antes de publicar a broker
 
@@ -82,4 +82,5 @@ El adapter de log queda solo para el perfil `in-memory`.
 - La creacion del ticket y el evento quedan dentro del mismo limite transaccional.
 - El sistema puede reintentar publicacion al broker sin duplicar el ticket.
 - El relay RabbitMQ lee `PENDING`, publica en `support.events` y marca `PUBLISHED` o `FAILED`.
-- El siguiente paso es conectar `03-event-driven-notification-hub` como consumidor real.
+- `03-event-driven-notification-hub` ya consume el evento `ticket.created` desde RabbitMQ.
+- Falta validar end-to-end con Docker local.
