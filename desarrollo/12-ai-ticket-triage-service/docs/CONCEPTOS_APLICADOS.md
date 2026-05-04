@@ -2,7 +2,10 @@
 
 ## IA aplicada a backend
 
-El proyecto modela un puerto `TriageModelPort` para reemplazar una implementacion rule-based por OpenAI, Azure OpenAI o Bedrock.
+El proyecto modela un puerto `TriageModelPort` y dos adapters:
+
+- `RuleBasedTriageModelAdapter` para fallback local.
+- `ExternalTriageModelAdapter` para llamar un proveedor HTTP compatible con el contrato de triage.
 
 ## Structured outputs
 
@@ -14,7 +17,7 @@ El proyecto modela un puerto `TriageModelPort` para reemplazar una implementacio
 
 ## Fallback
 
-La implementacion rule-based puede actuar como fallback si el proveedor LLM falla.
+La implementacion rule-based actua como fallback si el proveedor LLM falla o devuelve una salida invalida.
 
 ## Conceptos del perfil que cubre
 
@@ -22,6 +25,5 @@ La implementacion rule-based puede actuar como fallback si el proveedor LLM fall
 - Structured outputs.
 - Prompt versioning.
 - Provider abstraction.
-- Cost/fallback como siguiente paso.
+- Fallback operativo.
 - Seguridad de datos.
-

@@ -19,7 +19,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Sin performance ejecutada | Hay scripts k6 para soporte bancario, notification hub y gateway, pero aun no hay medicion real | Levantar servicios locales y capturar baseline p95 |
 | Observabilidad operativa inicial | Servicios 01, 03 y 04 exponen Prometheus, exportan trazas OTLP, y el compose incluye Collector, Tempo, Prometheus, Grafana, reglas SLI/SLO y runbook inicial | Validar con Docker local y agregar correlacion trazas-dashboard |
 | Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable, realm Keycloak versionado, rate limiting Redis y pruebas WebFlux de 401/403/429 | Validar end-to-end con Keycloak y Redis locales |
-| IA simulada | No llama proveedor real | Agregar adapter real y WireMock para pruebas |
+| IA simulada | Proyecto 12 ya tiene adapter HTTP externo configurable, validacion de salida y fallback rule-based; falta contrato WireMock y metricas de costo/tokens | Agregar WireMock, costo/tokens y guardrails |
 
 ## Sprint 1: estabilizacion tecnica
 
@@ -117,12 +117,12 @@ Entregables:
 
 Objetivo:
 
-- Reemplazar adapters simulados por proveedor real o mock WireMock.
+- Completar adapters IA con proveedor HTTP configurable y mock WireMock.
 - Medir costo, tokens y latencia.
 
 Entregables:
 
-- Adapter LLM real.
-- Tests con WireMock.
+- Adapter LLM HTTP configurable.
+- Tests de contrato con WireMock.
 - Metricas de IA.
 - Guardrails basicos.

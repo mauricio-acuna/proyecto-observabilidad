@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: ai-ticket-triage-service
+
+app:
+  ai:
+    provider: ${APP_AI_PROVIDER:rule-based}
+    external:
+      base-url: ${APP_AI_EXTERNAL_BASE_URL:http://localhost:8099}
+      api-key: ${APP_AI_EXTERNAL_API_KEY:}
+
+server:
+  port: ${SERVER_PORT:8092}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      service: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: ${MANAGEMENT_TRACING_SAMPLING_PROBABILITY:1.0}
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:http://localhost:4318/v1/traces}
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

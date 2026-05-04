@@ -3,11 +3,13 @@ package com.proyecto2027.aitriage.infrastructure;
 import com.proyecto2027.aitriage.application.TriageModelPort;
 import com.proyecto2027.aitriage.domain.TicketTriageRequest;
 import com.proyecto2027.aitriage.domain.TriageResult;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@ConditionalOnProperty(name = "app.ai.provider", havingValue = "rule-based", matchIfMissing = true)
 public class RuleBasedTriageModelAdapter implements TriageModelPort {
     @Override
     public TriageResult classify(TicketTriageRequest request, String promptVersion) {

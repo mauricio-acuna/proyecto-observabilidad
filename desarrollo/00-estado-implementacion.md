@@ -26,15 +26,15 @@ Resultado:
 
 ```text
 BUILD SUCCESSFUL
-67 actionable tasks: 65 executed, 2 up-to-date
+68 actionable tasks: 66 executed, 2 up-to-date
 ```
 
 Cobertura actual:
 
 - 12 proyectos compilados.
 - 12 proyectos con al menos un test unitario.
-- 27 tests detectados.
-- 24 tests ejecutados.
+- 29 tests detectados.
+- 26 tests ejecutados.
 - 3 tests de integracion Testcontainers omitidos porque Docker no esta disponible en este entorno.
 - 0 fallos.
 - 0 errores.
@@ -56,7 +56,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 | 09 Batch reporting modernization | Validacion batch y puerto de importacion | Agregar job Spring Batch real con reader/processor/writer |
 | 10 Platform engineering service template | Template con CI, Docker, K8s y health | Agregar generador o guia de uso del template |
 | 11 Modular monolith to microservices | Modulos internos separados por API | Agregar eventos internos y plan de extraccion |
-| 12 AI ticket triage service | Puerto de IA, salida estructurada y fallback rule-based | Agregar proveedor LLM real, WireMock y control de costo |
+| 12 AI ticket triage service | Puerto de IA, salida estructurada, adapter HTTP externo configurable, validacion de output y fallback rule-based | Agregar metricas de costo/tokens y WireMock |
 
 ## Criterio de avance
 

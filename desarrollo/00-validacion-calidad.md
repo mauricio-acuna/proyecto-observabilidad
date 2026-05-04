@@ -31,18 +31,19 @@ El comando fue ejecutado correctamente y el resultado fue:
 
 ```text
 BUILD SUCCESSFUL
-67 actionable tasks: 65 executed, 2 up-to-date
+68 actionable tasks: 66 executed, 2 up-to-date
 ```
 
 Tests actuales:
 
-- 24 tests ejecutados.
-- 27 tests detectados.
+- 26 tests ejecutados.
+- 29 tests detectados.
 - 3 tests de integracion Testcontainers preparados y omitidos cuando Docker no esta disponible.
 - 12 proyectos con compilacion verificada.
 - 12 proyectos con al menos un test.
 - Tests de integracion reales agregados para persistencia PostgreSQL y outbox del proyecto 01.
 - Tests WebFlux agregados para respuestas 401, 403 y 429 del gateway.
+- Tests HTTP mockeados agregados para adapter externo y fallback del proyecto 12.
 - Sin pruebas de performance ejecutadas todavia.
 
 ## CI
@@ -126,6 +127,7 @@ Servicios de aplicacion:
 - `01-plataforma-soporte-bancario` en `localhost:8081`.
 - `03-event-driven-notification-hub` en `localhost:8083`.
 - `04-secure-api-gateway-identity` en `localhost:8080`.
+- `12-ai-ticket-triage-service` en `localhost:8092`.
 
 Prometheus scrapea `/actuator/prometheus` y Grafana provisiona el dashboard `Proyecto2027 Overview`.
 

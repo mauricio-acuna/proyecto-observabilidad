@@ -142,6 +142,25 @@ services:
       otel-collector:
         condition: service_started
 
+  ai-ticket-triage-service:
+    profiles: ["apps"]
+    build:
+      context: .
+      dockerfile: Dockerfile.spring-app
+      args:
+        GRADLE_PROJECT: desarrollo:12-ai-ticket-triage-service
+        MODULE_DIR: desarrollo/12-ai-ticket-triage-service
+    container_name: proyecto2027-ai-ticket-triage-service
+    environment:
+      SERVER_PORT: 8092
+      APP_AI_PROVIDER: rule-based
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    ports:
+      - "8092:8092"
+    depends_on:
+      otel-collector:
+        condition: service_started
+
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.99.0
     container_name: proyecto2027-otel-collector

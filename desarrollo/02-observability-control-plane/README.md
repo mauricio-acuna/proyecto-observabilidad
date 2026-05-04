@@ -91,6 +91,7 @@ Servicios instrumentados inicialmente:
 - `01-plataforma-soporte-bancario` en `localhost:8081`.
 - `03-event-driven-notification-hub` en `localhost:8083`.
 - `04-secure-api-gateway-identity` en `localhost:8080`.
+- `12-ai-ticket-triage-service` en `localhost:8092`.
 
 Los servicios exponen metricas en `/actuator/prometheus` y exportan trazas por OTLP HTTP al collector.
 El collector mantiene un exporter `debug` para desarrollo local y reenvia trazas a Tempo por OTLP gRPC.

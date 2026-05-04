@@ -14,6 +14,7 @@ Este proyecto aplica IA de forma acotada y defendible dentro de un backend.
 - Generar resumen.
 - Sugerir siguiente accion.
 - Devolver salida JSON estructurada.
+- Adapter HTTP externo configurable para proveedor LLM.
 - Registrar costo, latencia y errores.
 - Fallback si falla el proveedor.
 
@@ -47,11 +48,29 @@ Este proyecto aplica IA de forma acotada y defendible dentro de un backend.
 Componentes:
 
 - `triage-api`
-- `llm-provider-client`
+- `llm-provider-client` via `ExternalTriageModelAdapter`
 - `prompt-registry`
 - `classification-validator`
 - `cost-tracker`
 - `audit-log`
+
+## Configuracion local actual
+
+Por defecto usa clasificacion rule-based:
+
+```bash
+APP_AI_PROVIDER=rule-based
+```
+
+Para activar un proveedor externo compatible con el contrato JSON:
+
+```bash
+APP_AI_PROVIDER=external
+APP_AI_EXTERNAL_BASE_URL=http://localhost:8099
+APP_AI_EXTERNAL_API_KEY=dev-token
+```
+
+El adapter externo llama `POST /v1/triage`, valida campos obligatorios de `TriageResult` y vuelve al fallback rule-based si el proveedor falla o devuelve una salida invalida.
 
 ## Que se puede defender en entrevista
 
@@ -67,7 +86,7 @@ Componentes:
 - API de triage.
 - Prompts versionados.
 - JSON schema de salida.
-- Tests con WireMock.
+- Tests de adapter externo con HTTP mockeado.
+- Fallback rule-based.
 - Metricas de tokens/costo/latencia.
 - ADR sobre uso seguro de IA.
-

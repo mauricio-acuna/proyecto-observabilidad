@@ -32,3 +32,12 @@ scrape_configs:
           - event-driven-notification-hub:8083
         labels:
           service: event-driven-notification-hub
+
+  - job_name: ai-ticket-triage-service
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+          - host.docker.internal:8092
+          - ai-ticket-triage-service:8092
+        labels:
+          service: ai-ticket-triage-service
