@@ -19,6 +19,11 @@ El proyecto modela un puerto `TriageModelPort` y dos adapters:
 
 La implementacion rule-based actua como fallback si el proveedor LLM falla o devuelve una salida invalida.
 
+## Cost observability
+
+`TriageProviderMetrics` registra llamadas al proveedor, fallbacks, tokens de entrada/salida y costo estimado.
+El adapter externo lee los headers `X-Input-Tokens`, `X-Output-Tokens` y `X-Estimated-Cost-Usd` cuando el proveedor los entrega.
+
 ## Conceptos del perfil que cubre
 
 - LLM integration.
@@ -26,4 +31,5 @@ La implementacion rule-based actua como fallback si el proveedor LLM falla o dev
 - Prompt versioning.
 - Provider abstraction.
 - Fallback operativo.
+- Metricas de costo/tokens.
 - Seguridad de datos.

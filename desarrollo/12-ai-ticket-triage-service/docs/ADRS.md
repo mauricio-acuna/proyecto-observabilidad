@@ -36,4 +36,5 @@ El fallback mantiene disponibilidad y hace que el servicio sea defendible aunque
 
 - El contrato externo queda reducido a JSON estructurado.
 - La API puede correr sin credenciales usando `rule-based`.
-- Falta agregar metricas de costo/tokens y pruebas de contrato con WireMock.
+- Se registran metricas de llamadas al provider, fallback, tokens y costo estimado cuando el provider entrega headers de consumo.
+- Falta agregar pruebas de contrato con WireMock y guardrails de datos sensibles.

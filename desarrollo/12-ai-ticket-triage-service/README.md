@@ -72,6 +72,13 @@ APP_AI_EXTERNAL_API_KEY=dev-token
 
 El adapter externo llama `POST /v1/triage`, valida campos obligatorios de `TriageResult` y vuelve al fallback rule-based si el proveedor falla o devuelve una salida invalida.
 
+Si el proveedor devuelve headers de consumo, el servicio registra metricas Micrometer:
+
+- `ai_triage_provider_requests_total`
+- `ai_triage_fallback_total`
+- `ai_triage_tokens_total`
+- `ai_triage_estimated_cost_usd_total`
+
 ## Que se puede defender en entrevista
 
 - Por que no basta con "hacer un POST al modelo".
@@ -88,5 +95,5 @@ El adapter externo llama `POST /v1/triage`, valida campos obligatorios de `Triag
 - JSON schema de salida.
 - Tests de adapter externo con HTTP mockeado.
 - Fallback rule-based.
-- Metricas de tokens/costo/latencia.
+- Metricas de provider, fallback, tokens y costo estimado.
 - ADR sobre uso seguro de IA.

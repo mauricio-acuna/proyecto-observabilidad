@@ -36,14 +36,15 @@ BUILD SUCCESSFUL
 
 Tests actuales:
 
-- 26 tests ejecutados.
-- 29 tests detectados.
+- 27 tests ejecutados.
+- 30 tests detectados.
 - 3 tests de integracion Testcontainers preparados y omitidos cuando Docker no esta disponible.
 - 12 proyectos con compilacion verificada.
 - 12 proyectos con al menos un test.
 - Tests de integracion reales agregados para persistencia PostgreSQL y outbox del proyecto 01.
 - Tests WebFlux agregados para respuestas 401, 403 y 429 del gateway.
 - Tests HTTP mockeados agregados para adapter externo y fallback del proyecto 12.
+- Tests de metricas agregados para tokens, costo estimado y fallback del proyecto 12.
 - Sin pruebas de performance ejecutadas todavia.
 
 ## CI

@@ -6,6 +6,7 @@ import com.proyecto2027.aitriage.domain.TriageResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
@@ -18,18 +19,21 @@ public class ExternalTriageModelAdapter implements TriageModelPort {
 
     private final RestClient restClient;
     private final RuleBasedTriageModelAdapter fallback;
+    private final TriageProviderMetrics metrics;
 
     public ExternalTriageModelAdapter(
             RestClient.Builder restClientBuilder,
+            TriageProviderMetrics metrics,
             @Value("${app.ai.external.base-url}") String baseUrl,
             @Value("${app.ai.external.api-key:}") String apiKey
     ) {
-        this(restClientBuilder, new RuleBasedTriageModelAdapter(), baseUrl, apiKey);
+        this(restClientBuilder, new RuleBasedTriageModelAdapter(), metrics, baseUrl, apiKey);
     }
 
     ExternalTriageModelAdapter(
             RestClient.Builder restClientBuilder,
             RuleBasedTriageModelAdapter fallback,
+            TriageProviderMetrics metrics,
             String baseUrl,
             String apiKey
     ) {
@@ -39,22 +43,27 @@ public class ExternalTriageModelAdapter implements TriageModelPort {
         }
         this.restClient = builder.build();
         this.fallback = fallback;
+        this.metrics = metrics;
     }
 
     @Override
     public TriageResult classify(TicketTriageRequest request, String promptVersion) {
         try {
-            TriageResult result = restClient.post()
+            ResponseEntity<TriageResult> response = restClient.post()
                     .uri("/v1/triage")
                     .body(new ExternalTriageRequest(request, promptVersion))
                     .retrieve()
-                    .body(TriageResult.class);
+                    .toEntity(TriageResult.class);
 
+            TriageResult result = response.getBody();
             if (!isValid(result)) {
+                metrics.providerFallback("external", "invalid_output");
                 return fallback.classify(request, promptVersion);
             }
+            metrics.providerSuccess("external", response.getHeaders());
             return ensurePromptVersion(result, promptVersion);
         } catch (RestClientException ex) {
+            metrics.providerFallback("external", "provider_error");
             return fallback.classify(request, promptVersion);
         }
     }

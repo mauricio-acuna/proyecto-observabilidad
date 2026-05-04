@@ -69,8 +69,8 @@ window.dashboardData = {
     {
       name: "12 AI ticket triage service",
       status: "Adapter IA externo",
-      demonstrates: "IA aplicada, structured outputs, prompt version, fallback",
-      next: "Metricas de costo/tokens y WireMock"
+      demonstrates: "IA aplicada, structured outputs, prompt version, fallback, costo/tokens",
+      next: "WireMock y guardrails"
     }
   ],
   coverage: [
@@ -80,7 +80,7 @@ window.dashboardData = {
     ["Eventos e idempotencia", 65],
     ["Seguridad", 55],
     ["Cloud/AWS/FinOps", 35],
-    ["IA aplicada", 45],
+    ["IA aplicada", 50],
     ["Performance", 25]
   ],
   sprints: [

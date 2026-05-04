@@ -2,6 +2,7 @@ package com.proyecto2027.aitriage.infrastructure;
 
 import com.proyecto2027.aitriage.domain.TicketTriageRequest;
 import org.junit.jupiter.api.Test;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestClient;
@@ -25,6 +26,7 @@ class ExternalTriageModelAdapterTest {
         var adapter = new ExternalTriageModelAdapter(
                 builder,
                 new RuleBasedTriageModelAdapter(),
+                new TriageProviderMetrics(new SimpleMeterRegistry()),
                 "http://llm-provider.test",
                 "secret"
         );
@@ -62,6 +64,7 @@ class ExternalTriageModelAdapterTest {
         var adapter = new ExternalTriageModelAdapter(
                 builder,
                 new RuleBasedTriageModelAdapter(),
+                new TriageProviderMetrics(new SimpleMeterRegistry()),
                 "http://llm-provider.test",
                 ""
         );
