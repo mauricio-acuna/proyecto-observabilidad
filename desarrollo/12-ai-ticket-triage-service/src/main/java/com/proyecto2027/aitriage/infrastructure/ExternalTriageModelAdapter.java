@@ -20,20 +20,23 @@ public class ExternalTriageModelAdapter implements TriageModelPort {
     private final RestClient restClient;
     private final RuleBasedTriageModelAdapter fallback;
     private final TriageProviderMetrics metrics;
+    private final SensitiveDataRedactor redactor;
 
     public ExternalTriageModelAdapter(
             RestClient.Builder restClientBuilder,
             TriageProviderMetrics metrics,
+            SensitiveDataRedactor redactor,
             @Value("${app.ai.external.base-url}") String baseUrl,
             @Value("${app.ai.external.api-key:}") String apiKey
     ) {
-        this(restClientBuilder, new RuleBasedTriageModelAdapter(), metrics, baseUrl, apiKey);
+        this(restClientBuilder, new RuleBasedTriageModelAdapter(), metrics, redactor, baseUrl, apiKey);
     }
 
     ExternalTriageModelAdapter(
             RestClient.Builder restClientBuilder,
             RuleBasedTriageModelAdapter fallback,
             TriageProviderMetrics metrics,
+            SensitiveDataRedactor redactor,
             String baseUrl,
             String apiKey
     ) {
@@ -44,6 +47,7 @@ public class ExternalTriageModelAdapter implements TriageModelPort {
         this.restClient = builder.build();
         this.fallback = fallback;
         this.metrics = metrics;
+        this.redactor = redactor;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class ExternalTriageModelAdapter implements TriageModelPort {
         try {
             ResponseEntity<TriageResult> response = restClient.post()
                     .uri("/v1/triage")
-                    .body(new ExternalTriageRequest(request, promptVersion))
+                    .body(new ExternalTriageRequest(redactor.redact(request), promptVersion))
                     .retrieve()
                     .toEntity(TriageResult.class);
 

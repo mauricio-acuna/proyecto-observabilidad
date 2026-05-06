@@ -7,8 +7,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestClient;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.ExpectedCount.once;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.header;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -27,6 +31,7 @@ class ExternalTriageModelAdapterTest {
                 builder,
                 new RuleBasedTriageModelAdapter(),
                 new TriageProviderMetrics(new SimpleMeterRegistry()),
+                new SensitiveDataRedactor(),
                 "http://llm-provider.test",
                 "secret"
         );
@@ -65,6 +70,7 @@ class ExternalTriageModelAdapterTest {
                 builder,
                 new RuleBasedTriageModelAdapter(),
                 new TriageProviderMetrics(new SimpleMeterRegistry()),
+                new SensitiveDataRedactor(),
                 "http://llm-provider.test",
                 ""
         );
@@ -80,6 +86,51 @@ class ExternalTriageModelAdapterTest {
         assertThat(result.category()).isEqualTo("CARDS");
         assertThat(result.priority()).isEqualTo("HIGH");
         assertThat(result.promptVersion()).isEqualTo("triage-v1");
+        server.verify();
+    }
+
+    @Test
+    void redactsSensitiveDataBeforeCallingProvider() {
+        RestClient.Builder builder = RestClient.builder();
+        MockRestServiceServer server = MockRestServiceServer.bindTo(builder).build();
+        var adapter = new ExternalTriageModelAdapter(
+                builder,
+                new RuleBasedTriageModelAdapter(),
+                new TriageProviderMetrics(new SimpleMeterRegistry()),
+                new SensitiveDataRedactor(),
+                "http://llm-provider.test",
+                ""
+        );
+
+        server.expect(once(), requestTo("http://llm-provider.test/v1/triage"))
+                .andExpect(content().string(allOf(
+                        containsString("[REDACTED_EMAIL]"),
+                        containsString("[REDACTED_CARD]"),
+                        containsString("[REDACTED_DOCUMENT]"),
+                        not(containsString("client@example.com")),
+                        not(containsString("4111 1111 1111 1111")),
+                        not(containsString("DNI 12345678"))
+                )))
+                .andRespond(withSuccess("""
+                        {
+                          "category": "CARDS",
+                          "priority": "HIGH",
+                          "extractedEntities": [],
+                          "summary": "Redacted card issue",
+                          "nextAction": "Review card status",
+                          "promptVersion": "triage-v1"
+                        }
+                        """, MediaType.APPLICATION_JSON));
+
+        adapter.classify(
+                new TicketTriageRequest(
+                        "Card blocked for client@example.com",
+                        "Card 4111 1111 1111 1111 failed. DNI 12345678",
+                        "premium"
+                ),
+                "triage-v1"
+        );
+
         server.verify();
     }
 }

@@ -15,6 +15,7 @@ Este proyecto aplica IA de forma acotada y defendible dentro de un backend.
 - Sugerir siguiente accion.
 - Devolver salida JSON estructurada.
 - Adapter HTTP externo configurable para proveedor LLM.
+- Redaccion de datos sensibles antes de llamar al proveedor externo.
 - Registrar costo, latencia y errores.
 - Fallback si falla el proveedor.
 
@@ -71,6 +72,7 @@ APP_AI_EXTERNAL_API_KEY=dev-token
 ```
 
 El adapter externo llama `POST /v1/triage`, valida campos obligatorios de `TriageResult` y vuelve al fallback rule-based si el proveedor falla o devuelve una salida invalida.
+Antes de enviar el payload, `SensitiveDataRedactor` reemplaza emails, tarjetas, documentos y telefonos por placeholders.
 
 Si el proveedor devuelve headers de consumo, el servicio registra metricas Micrometer:
 
@@ -95,5 +97,6 @@ Si el proveedor devuelve headers de consumo, el servicio registra metricas Micro
 - JSON schema de salida.
 - Tests de adapter externo con HTTP mockeado.
 - Fallback rule-based.
+- Guardrails de redaccion de datos sensibles.
 - Metricas de provider, fallback, tokens y costo estimado.
 - ADR sobre uso seguro de IA.

@@ -33,8 +33,8 @@ Cobertura actual:
 
 - 12 proyectos compilados.
 - 12 proyectos con al menos un test unitario.
-- 30 tests detectados.
-- 27 tests ejecutados.
+- 32 tests detectados.
+- 29 tests ejecutados.
 - 3 tests de integracion Testcontainers omitidos porque Docker no esta disponible en este entorno.
 - 0 fallos.
 - 0 errores.
@@ -56,7 +56,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 | 09 Batch reporting modernization | Validacion batch y puerto de importacion | Agregar job Spring Batch real con reader/processor/writer |
 | 10 Platform engineering service template | Template con CI, Docker, K8s y health | Agregar generador o guia de uso del template |
 | 11 Modular monolith to microservices | Modulos internos separados por API | Agregar eventos internos y plan de extraccion |
-| 12 AI ticket triage service | Puerto de IA, salida estructurada, adapter HTTP externo configurable, validacion de output, fallback rule-based y metricas de provider/tokens/costo | Agregar WireMock y guardrails |
+| 12 AI ticket triage service | Puerto de IA, salida estructurada, adapter HTTP externo configurable, validacion de output, redaccion de datos sensibles, fallback rule-based y metricas de provider/tokens/costo | Agregar pruebas de contrato WireMock |
 
 ## Criterio de avance
 

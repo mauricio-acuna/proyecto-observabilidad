@@ -25,7 +25,7 @@ Evita respuestas libres dificiles de integrar en backend.
 ### Decision
 
 Activar un adapter HTTP externo cuando `APP_AI_PROVIDER=external`.
-El adapter llama `POST /v1/triage`, exige salida compatible con `TriageResult` y usa `RuleBasedTriageModelAdapter` como fallback ante error o respuesta invalida.
+El adapter llama `POST /v1/triage`, redacta datos sensibles antes de enviar el payload, exige salida compatible con `TriageResult` y usa `RuleBasedTriageModelAdapter` como fallback ante error o respuesta invalida.
 
 ### Motivo
 
@@ -37,4 +37,5 @@ El fallback mantiene disponibilidad y hace que el servicio sea defendible aunque
 - El contrato externo queda reducido a JSON estructurado.
 - La API puede correr sin credenciales usando `rule-based`.
 - Se registran metricas de llamadas al provider, fallback, tokens y costo estimado cuando el provider entrega headers de consumo.
-- Falta agregar pruebas de contrato con WireMock y guardrails de datos sensibles.
+- Se evitan fugas obvias de emails, tarjetas, documentos y telefonos hacia el proveedor externo.
+- Falta agregar pruebas de contrato con WireMock.
