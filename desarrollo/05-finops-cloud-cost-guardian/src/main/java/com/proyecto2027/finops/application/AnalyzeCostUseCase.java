@@ -14,9 +14,11 @@ import java.util.stream.Collectors;
 public class AnalyzeCostUseCase {
 
     private final CostProviderPort costProvider;
+    private final List<CostAnalysisObserver> observers;
 
-    public AnalyzeCostUseCase(CostProviderPort costProvider) {
+    public AnalyzeCostUseCase(CostProviderPort costProvider, List<CostAnalysisObserver> observers) {
         this.costProvider = costProvider;
+        this.observers = observers;
     }
 
     public List<CostRecommendation> execute(LocalDate from, LocalDate to) {
@@ -27,7 +29,7 @@ public class AnalyzeCostUseCase {
                         Collectors.mapping(CloudCostRecord::amountUsd, Collectors.reducing(BigDecimal.ZERO, BigDecimal::add))
                 ));
 
-        return totalByService.entrySet().stream()
+        List<CostRecommendation> recommendations = totalByService.entrySet().stream()
                 .filter(entry -> entry.getValue().compareTo(new BigDecimal("500")) > 0)
                 .map(entry -> new CostRecommendation(
                         entry.getKey(),
@@ -36,5 +38,7 @@ public class AnalyzeCostUseCase {
                         entry.getValue().multiply(new BigDecimal("0.15"))
                 ))
                 .toList();
+        observers.forEach(observer -> observer.recordAnalysis(records, recommendations));
+        return recommendations;
     }
 }

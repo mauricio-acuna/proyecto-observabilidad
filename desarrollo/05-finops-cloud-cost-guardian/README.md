@@ -13,6 +13,7 @@ Este proyecto analiza costos cloud y genera recomendaciones simples.
 - Clasificacion por servicio/equipo/entorno.
 - Deteccion de gasto anomalo.
 - Recomendaciones de right sizing.
+- Metricas de gasto analizado, recomendaciones y ahorro estimado.
 - Alertas de presupuesto.
 - Reporte semanal.
 
@@ -70,6 +71,14 @@ APP_FINOPS_AWS_API_KEY=dev-token
 El adapter llama `GET /cost-explorer/costs?from=YYYY-MM-DD&to=YYYY-MM-DD`.
 Si la API externa falla o devuelve una lista vacia, el sistema usa el provider simulado como fallback.
 
+Metricas publicadas:
+
+- `finops_cost_records_analyzed_total`
+- `finops_cost_analyzed_usd_total`
+- `finops_recommendations_total`
+- `finops_recommendations_by_severity_total`
+- `finops_estimated_savings_usd_total`
+
 ## Que se puede defender en entrevista
 
 - Por que costo tambien es una decision de arquitectura.
@@ -84,5 +93,6 @@ Si la API externa falla o devuelve una lista vacia, el sistema usa el provider s
 - Job de ingesta.
 - Reglas de recomendacion.
 - Dashboard de costos.
+- Metricas financieras Micrometer.
 - Tests con datos simulados y provider HTTP mockeado.
 - ADR sobre control de costos.

@@ -20,7 +20,7 @@ La deuda tecnica actual es deliberada: se priorizo crear una base amplia, compil
 | Observabilidad operativa inicial | Servicios 01, 03 y 04 exponen Prometheus, exportan trazas OTLP, y el compose incluye Collector, Tempo, Prometheus, Grafana, reglas SLI/SLO y runbook inicial | Validar con Docker local y agregar correlacion trazas-dashboard |
 | Seguridad gateway inicial | Gateway valida JWT, usa issuer OIDC configurable, realm Keycloak versionado, rate limiting Redis y pruebas WebFlux de 401/403/429 | Validar end-to-end con Keycloak y Redis locales |
 | IA simulada | Proyecto 12 ya tiene adapter HTTP externo configurable, validacion de salida, redaccion de datos sensibles, fallback rule-based y metricas de provider/tokens/costo | Agregar pruebas de contrato WireMock |
-| FinOps externo inicial | Proyecto 05 ya tiene provider HTTP estilo Cost Explorer configurable y fallback simulado | Agregar metricas financieras y budget alerts |
+| FinOps externo inicial | Proyecto 05 ya tiene provider HTTP estilo Cost Explorer configurable, fallback simulado y metricas financieras de gasto/recomendaciones/ahorro | Agregar budget alerts |
 
 ## Sprint 1: estabilizacion tecnica
 

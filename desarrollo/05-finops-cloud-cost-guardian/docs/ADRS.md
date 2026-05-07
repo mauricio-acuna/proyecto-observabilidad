@@ -25,4 +25,20 @@ Permite demostrar integracion con datos tipo AWS Cost Explorer sin acoplar el ca
 
 - La logica de recomendaciones no cambia al reemplazar el origen de datos.
 - Las pruebas pueden validar contrato HTTP con `MockRestServiceServer`.
-- Falta agregar metricas financieras, alertas de presupuesto y un adapter AWS SDK real si se requieren credenciales reales.
+- Falta agregar alertas de presupuesto y un adapter AWS SDK real si se requieren credenciales reales.
+
+## ADR-003: Observar el analisis FinOps como metrica de negocio
+
+### Decision
+
+Agregar `CostAnalysisObserver` como puerto de observacion del caso de uso y `FinOpsMetrics` como implementacion Micrometer.
+
+### Motivo
+
+Las recomendaciones FinOps no son solo datos tecnicos: deben poder medirse como gasto analizado, oportunidades detectadas y ahorro estimado.
+
+### Consecuencias
+
+- El caso de uso sigue sin depender de Micrometer.
+- Prometheus puede consultar gasto analizado, recomendaciones y ahorro estimado.
+- Falta agregar reglas de alerta para presupuestos y anomalias.

@@ -26,15 +26,15 @@ Resultado:
 
 ```text
 BUILD SUCCESSFUL
-68 actionable tasks: 66 executed, 2 up-to-date
+69 actionable tasks: 67 executed, 2 up-to-date
 ```
 
 Cobertura actual:
 
 - 12 proyectos compilados.
 - 12 proyectos con al menos un test unitario.
-- 34 tests detectados.
-- 31 tests ejecutados.
+- 36 tests detectados.
+- 33 tests ejecutados.
 - 3 tests de integracion Testcontainers omitidos porque Docker no esta disponible en este entorno.
 - 0 fallos.
 - 0 errores.
@@ -49,7 +49,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 | 02 Observability control plane | Politicas de telemetria, collector config, Tempo, Prometheus, Grafana, dashboard inicial, reglas SLI/SLO, runbook y scrape de apps host/container | Validar trazas end-to-end con Docker |
 | 03 Event-driven notification hub | Consumidor idempotente, sender desacoplado, Prometheus/OTLP tracing, listener RabbitMQ, retry, DLQ, processed events persistentes, intentos/dead letters auditables, snapshot operativo, metricas Micrometer y Dockerfile reusable | Validar flujo completo con Docker |
 | 04 Secure API gateway identity | Gateway, JWT resource server, issuer OIDC configurable, realm Keycloak versionado, Redis rate limiting, correlation id, observabilidad y tests 401/403/429 | Validar flujo end-to-end con Keycloak y Redis locales |
-| 05 FinOps cloud cost guardian | Analisis de costos, recomendaciones, provider HTTP estilo Cost Explorer configurable, fallback simulado y tests mockeados | Agregar metricas financieras y budget alerts |
+| 05 FinOps cloud cost guardian | Analisis de costos, recomendaciones, provider HTTP estilo Cost Explorer configurable, fallback simulado, metricas financieras y tests mockeados | Agregar budget alerts |
 | 06 RAG knowledge assistant | Pipeline RAG conceptual con puertos de vector search y LLM | Agregar pgvector/Qdrant y evaluacion de respuestas |
 | 07 Incident response runbook system | Dominio de incidentes y API | Agregar runbooks, postmortems y SLOs |
 | 08 Payment risk monitoring | Motor de reglas componibles | Agregar eventos, auditoria persistente y metricas de falsos positivos |

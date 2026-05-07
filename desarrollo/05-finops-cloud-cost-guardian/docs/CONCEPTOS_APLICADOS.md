@@ -13,12 +13,18 @@ El proyecto convierte costos cloud en recomendaciones tecnicas accionables.
 
 Las recomendaciones estiman ahorro, conectando arquitectura con negocio.
 
+## Observabilidad financiera
+
+`CostAnalysisObserver` permite observar el resultado del analisis sin acoplar el caso de uso a Micrometer.
+`FinOpsMetrics` publica gasto analizado, recomendaciones por severidad y ahorro mensual estimado.
+
 ## Conceptos del perfil que cubre
 
 - AWS Cost Explorer/Budgets.
 - Costos.
 - Integraciones externas.
 - Fallback ante fallos de proveedor.
+- Metricas financieras.
 - Scheduled analysis.
 - Observabilidad financiera.
 - Comunicacion senior con negocio.

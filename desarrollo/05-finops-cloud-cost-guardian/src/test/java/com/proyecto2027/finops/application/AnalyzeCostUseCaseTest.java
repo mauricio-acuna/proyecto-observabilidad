@@ -18,7 +18,7 @@ class AnalyzeCostUseCaseTest {
                 new CloudCostRecord(from, "acc", "CloudWatch", "prod", new BigDecimal("100"))
         );
 
-        var recommendations = new AnalyzeCostUseCase(provider)
+        var recommendations = new AnalyzeCostUseCase(provider, List.of())
                 .execute(LocalDate.now().minusDays(7), LocalDate.now());
 
         assertThat(recommendations)
