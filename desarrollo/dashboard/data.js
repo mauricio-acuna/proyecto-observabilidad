@@ -26,9 +26,9 @@ window.dashboardData = {
     },
     {
       name: "05 FinOps cloud cost guardian",
-      status: "Compila + test",
-      demonstrates: "Costos cloud, recomendaciones, integracion externa",
-      next: "AWS Cost Explorer real"
+      status: "Provider FinOps externo",
+      demonstrates: "Costos cloud, recomendaciones, provider HTTP, fallback",
+      next: "Metricas financieras y budget alerts"
     },
     {
       name: "06 RAG knowledge assistant",
@@ -79,7 +79,7 @@ window.dashboardData = {
     ["Observabilidad", 75],
     ["Eventos e idempotencia", 65],
     ["Seguridad", 55],
-    ["Cloud/AWS/FinOps", 35],
+    ["Cloud/AWS/FinOps", 45],
     ["IA aplicada", 55],
     ["Performance", 25]
   ],

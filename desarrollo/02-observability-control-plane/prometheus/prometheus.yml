@@ -15,6 +15,15 @@ scrape_configs:
         labels:
           service: secure-api-gateway
 
+  - job_name: finops-cloud-cost-guardian
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+          - host.docker.internal:8085
+          - finops-cloud-cost-guardian:8085
+        labels:
+          service: finops-cloud-cost-guardian
+
   - job_name: plataforma-soporte-bancario
     metrics_path: /actuator/prometheus
     static_configs:

@@ -142,6 +142,25 @@ services:
       otel-collector:
         condition: service_started
 
+  finops-cloud-cost-guardian:
+    profiles: ["apps"]
+    build:
+      context: .
+      dockerfile: Dockerfile.spring-app
+      args:
+        GRADLE_PROJECT: desarrollo:05-finops-cloud-cost-guardian
+        MODULE_DIR: desarrollo/05-finops-cloud-cost-guardian
+    container_name: proyecto2027-finops-cloud-cost-guardian
+    environment:
+      SERVER_PORT: 8085
+      APP_FINOPS_PROVIDER: simulated
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    ports:
+      - "8085:8085"
+    depends_on:
+      otel-collector:
+        condition: service_started
+
   ai-ticket-triage-service:
     profiles: ["apps"]
     build:

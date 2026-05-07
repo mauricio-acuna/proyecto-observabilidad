@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: finops-cloud-cost-guardian
+
+app:
+  finops:
+    provider: ${APP_FINOPS_PROVIDER:simulated}
+    aws:
+      base-url: ${APP_FINOPS_AWS_BASE_URL:http://localhost:8095}
+      api-key: ${APP_FINOPS_AWS_API_KEY:}
+
+server:
+  port: ${SERVER_PORT:8085}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      service: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: ${MANAGEMENT_TRACING_SAMPLING_PROBABILITY:1.0}
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:http://localhost:4318/v1/traces}
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

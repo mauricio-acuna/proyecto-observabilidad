@@ -9,6 +9,7 @@ Este proyecto analiza costos cloud y genera recomendaciones simples.
 ## Capacidades funcionales
 
 - Ingesta de datos de costos simulados o AWS Cost Explorer.
+- Provider HTTP configurable compatible con un facade interno de Cost Explorer.
 - Clasificacion por servicio/equipo/entorno.
 - Deteccion de gasto anomalo.
 - Recomendaciones de right sizing.
@@ -50,6 +51,25 @@ Modulos:
 - `budget-alerts`
 - `report-api`
 
+## Configuracion local actual
+
+Por defecto usa datos simulados:
+
+```bash
+APP_FINOPS_PROVIDER=simulated
+```
+
+Para activar el provider HTTP:
+
+```bash
+APP_FINOPS_PROVIDER=aws-http
+APP_FINOPS_AWS_BASE_URL=http://localhost:8095
+APP_FINOPS_AWS_API_KEY=dev-token
+```
+
+El adapter llama `GET /cost-explorer/costs?from=YYYY-MM-DD&to=YYYY-MM-DD`.
+Si la API externa falla o devuelve una lista vacia, el sistema usa el provider simulado como fallback.
+
 ## Que se puede defender en entrevista
 
 - Por que costo tambien es una decision de arquitectura.
@@ -64,6 +84,5 @@ Modulos:
 - Job de ingesta.
 - Reglas de recomendacion.
 - Dashboard de costos.
-- Tests con datos simulados.
+- Tests con datos simulados y provider HTTP mockeado.
 - ADR sobre control de costos.
-

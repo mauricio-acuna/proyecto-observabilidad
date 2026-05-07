@@ -36,8 +36,8 @@ BUILD SUCCESSFUL
 
 Tests actuales:
 
-- 29 tests ejecutados.
-- 32 tests detectados.
+- 31 tests ejecutados.
+- 34 tests detectados.
 - 3 tests de integracion Testcontainers preparados y omitidos cuando Docker no esta disponible.
 - 12 proyectos con compilacion verificada.
 - 12 proyectos con al menos un test.
@@ -46,6 +46,7 @@ Tests actuales:
 - Tests HTTP mockeados agregados para adapter externo y fallback del proyecto 12.
 - Tests de metricas agregados para tokens, costo estimado y fallback del proyecto 12.
 - Tests de guardrails agregados para redaccion de datos sensibles antes de llamar al proveedor externo del proyecto 12.
+- Tests HTTP mockeados agregados para provider externo y fallback del proyecto 05.
 - Sin pruebas de performance ejecutadas todavia.
 
 ## CI
@@ -129,6 +130,7 @@ Servicios de aplicacion:
 - `01-plataforma-soporte-bancario` en `localhost:8081`.
 - `03-event-driven-notification-hub` en `localhost:8083`.
 - `04-secure-api-gateway-identity` en `localhost:8080`.
+- `05-finops-cloud-cost-guardian` en `localhost:8085`.
 - `12-ai-ticket-triage-service` en `localhost:8092`.
 
 Prometheus scrapea `/actuator/prometheus` y Grafana provisiona el dashboard `Proyecto2027 Overview`.
