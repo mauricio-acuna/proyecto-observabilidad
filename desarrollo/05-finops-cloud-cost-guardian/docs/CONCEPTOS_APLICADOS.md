@@ -18,6 +18,10 @@ Las recomendaciones estiman ahorro, conectando arquitectura con negocio.
 `CostAnalysisObserver` permite observar el resultado del analisis sin acoplar el caso de uso a Micrometer.
 `FinOpsMetrics` publica gasto analizado, recomendaciones por severidad y ahorro mensual estimado.
 
+## Budget alerts
+
+`EvaluateBudgetAlertsUseCase` agrupa gasto por servicio y ambiente, compara contra un presupuesto mensual configurable y clasifica severidad `MEDIUM` o `HIGH`.
+
 ## Conceptos del perfil que cubre
 
 - AWS Cost Explorer/Budgets.
@@ -25,6 +29,7 @@ Las recomendaciones estiman ahorro, conectando arquitectura con negocio.
 - Integraciones externas.
 - Fallback ante fallos de proveedor.
 - Metricas financieras.
+- Budget alerts.
 - Scheduled analysis.
 - Observabilidad financiera.
 - Comunicacion senior con negocio.

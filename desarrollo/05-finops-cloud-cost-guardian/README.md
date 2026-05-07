@@ -79,6 +79,18 @@ Metricas publicadas:
 - `finops_recommendations_by_severity_total`
 - `finops_estimated_savings_usd_total`
 
+Endpoint de alertas de presupuesto:
+
+```text
+GET /api/costs/budget-alerts?from=2026-05-01&to=2026-05-31
+```
+
+El umbral mensual por defecto se configura con:
+
+```bash
+APP_FINOPS_DEFAULT_MONTHLY_BUDGET_USD=1000
+```
+
 ## Que se puede defender en entrevista
 
 - Por que costo tambien es una decision de arquitectura.
@@ -94,5 +106,6 @@ Metricas publicadas:
 - Reglas de recomendacion.
 - Dashboard de costos.
 - Metricas financieras Micrometer.
+- Alertas de presupuesto por servicio y ambiente.
 - Tests con datos simulados y provider HTTP mockeado.
 - ADR sobre control de costos.

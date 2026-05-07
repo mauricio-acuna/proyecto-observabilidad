@@ -36,8 +36,8 @@ BUILD SUCCESSFUL
 
 Tests actuales:
 
-- 33 tests ejecutados.
-- 36 tests detectados.
+- 35 tests ejecutados.
+- 38 tests detectados.
 - 3 tests de integracion Testcontainers preparados y omitidos cuando Docker no esta disponible.
 - 12 proyectos con compilacion verificada.
 - 12 proyectos con al menos un test.
@@ -48,6 +48,7 @@ Tests actuales:
 - Tests de guardrails agregados para redaccion de datos sensibles antes de llamar al proveedor externo del proyecto 12.
 - Tests HTTP mockeados agregados para provider externo y fallback del proyecto 05.
 - Tests de metricas agregados para gasto analizado, recomendaciones y ahorro estimado del proyecto 05.
+- Tests de budget alerts agregados para umbrales y severidad del proyecto 05.
 - Sin pruebas de performance ejecutadas todavia.
 
 ## CI

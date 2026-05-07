@@ -42,3 +42,19 @@ Las recomendaciones FinOps no son solo datos tecnicos: deben poder medirse como 
 - El caso de uso sigue sin depender de Micrometer.
 - Prometheus puede consultar gasto analizado, recomendaciones y ahorro estimado.
 - Falta agregar reglas de alerta para presupuestos y anomalias.
+
+## ADR-004: Evaluar budget alerts en la capa de aplicacion
+
+### Decision
+
+Agregar `EvaluateBudgetAlertsUseCase` para agrupar gasto por servicio y ambiente, compararlo contra un presupuesto mensual configurable y devolver alertas con severidad.
+
+### Motivo
+
+Las alertas de presupuesto deben ser una regla de negocio visible y testeable, no solo una consulta de dashboard.
+
+### Consecuencias
+
+- El endpoint `/api/costs/budget-alerts` queda disponible para reportes o automatizacion.
+- El umbral default se configura con `APP_FINOPS_DEFAULT_MONTHLY_BUDGET_USD`.
+- Falta agregar deteccion de anomalias y notificaciones.

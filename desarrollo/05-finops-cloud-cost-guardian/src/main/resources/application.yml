@@ -5,6 +5,8 @@ spring:
 app:
   finops:
     provider: ${APP_FINOPS_PROVIDER:simulated}
+    budget:
+      default-monthly-usd: ${APP_FINOPS_DEFAULT_MONTHLY_BUDGET_USD:1000}
     aws:
       base-url: ${APP_FINOPS_AWS_BASE_URL:http://localhost:8095}
       api-key: ${APP_FINOPS_AWS_API_KEY:}
