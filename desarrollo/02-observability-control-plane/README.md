@@ -92,6 +92,7 @@ Servicios instrumentados inicialmente:
 - `03-event-driven-notification-hub` en `localhost:8083`.
 - `04-secure-api-gateway-identity` en `localhost:8080`.
 - `05-finops-cloud-cost-guardian` en `localhost:8085`.
+- `09-batch-reporting-modernization` en `localhost:8090`.
 - `12-ai-ticket-triage-service` en `localhost:8092`.
 
 Los servicios exponen metricas en `/actuator/prometheus` y exportan trazas por OTLP HTTP al collector.

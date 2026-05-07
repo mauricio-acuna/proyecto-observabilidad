@@ -180,6 +180,25 @@ services:
       otel-collector:
         condition: service_started
 
+  batch-reporting-modernization:
+    profiles: ["apps"]
+    build:
+      context: .
+      dockerfile: Dockerfile.spring-app
+      args:
+        GRADLE_PROJECT: desarrollo:09-batch-reporting-modernization
+        MODULE_DIR: desarrollo/09-batch-reporting-modernization
+    container_name: proyecto2027-batch-reporting-modernization
+    environment:
+      SERVER_PORT: 8090
+      APP_BATCH_JOB_ENABLED: "false"
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    ports:
+      - "8090:8090"
+    depends_on:
+      otel-collector:
+        condition: service_started
+
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.99.0
     container_name: proyecto2027-otel-collector

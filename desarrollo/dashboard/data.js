@@ -50,9 +50,9 @@ window.dashboardData = {
     },
     {
       name: "09 Batch reporting modernization",
-      status: "Compila + test",
-      demonstrates: "Batch, validacion, staging/rechazo",
-      next: "Reader/processor/writer real"
+      status: "Job Spring Batch",
+      demonstrates: "Batch, chunks, reader, processor, writer, staging/rechazo",
+      next: "Persistencia de estado y reprocesamiento"
     },
     {
       name: "10 Platform engineering template",
@@ -81,7 +81,8 @@ window.dashboardData = {
     ["Seguridad", 55],
     ["Cloud/AWS/FinOps", 55],
     ["IA aplicada", 55],
-    ["Performance", 25]
+    ["Performance", 25],
+    ["Batch", 45]
   ],
   sprints: [
     ["Sprint 1", "Estabilizar build, JDK 21, JaCoCo y Docker Compose minimo."],

@@ -124,5 +124,6 @@ project(':desarrollo:04-secure-api-gateway-identity') {
 project(':desarrollo:09-batch-reporting-modernization') {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-batch'
+        runtimeOnly 'com.h2database:h2'
     }
 }

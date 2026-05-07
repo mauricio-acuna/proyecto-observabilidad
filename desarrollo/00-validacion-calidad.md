@@ -31,13 +31,13 @@ El comando fue ejecutado correctamente y el resultado fue:
 
 ```text
 BUILD SUCCESSFUL
-69 actionable tasks: 67 executed, 2 up-to-date
+70 actionable tasks: 69 executed, 1 up-to-date
 ```
 
 Tests actuales:
 
-- 35 tests ejecutados.
-- 38 tests detectados.
+- 37 tests ejecutados.
+- 40 tests detectados.
 - 3 tests de integracion Testcontainers preparados y omitidos cuando Docker no esta disponible.
 - 12 proyectos con compilacion verificada.
 - 12 proyectos con al menos un test.
@@ -49,6 +49,7 @@ Tests actuales:
 - Tests HTTP mockeados agregados para provider externo y fallback del proyecto 05.
 - Tests de metricas agregados para gasto analizado, recomendaciones y ahorro estimado del proyecto 05.
 - Tests de budget alerts agregados para umbrales y severidad del proyecto 05.
+- Tests de componentes Spring Batch agregados para processor y writer del proyecto 09.
 - Sin pruebas de performance ejecutadas todavia.
 
 ## CI
@@ -133,6 +134,7 @@ Servicios de aplicacion:
 - `03-event-driven-notification-hub` en `localhost:8083`.
 - `04-secure-api-gateway-identity` en `localhost:8080`.
 - `05-finops-cloud-cost-guardian` en `localhost:8085`.
+- `09-batch-reporting-modernization` en `localhost:8090`.
 - `12-ai-ticket-triage-service` en `localhost:8092`.
 
 Prometheus scrapea `/actuator/prometheus` y Grafana provisiona el dashboard `Proyecto2027 Overview`.

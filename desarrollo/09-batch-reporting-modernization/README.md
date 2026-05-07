@@ -9,6 +9,7 @@ Muchas empresas mantienen procesos batch antiguos para reportes, conciliaciones 
 - Ingesta de archivo CSV/JSON.
 - Validacion de registros.
 - Procesamiento por chunks.
+- Job `transactionImportJob` con reader, processor y writer.
 - Escritura en PostgreSQL.
 - Reporte de errores.
 - Reintentos.
@@ -46,6 +47,18 @@ Jobs:
 - `transaction-reconciliation-job`
 - `daily-report-job`
 
+## Implementacion actual
+
+El proyecto incluye el job `transactionImportJob`, registrado cuando existe infraestructura Spring Batch (`JobRepository`).
+
+Componentes:
+
+- `transactionItemReader`: reader con datos de ejemplo.
+- `TransactionValidationItemProcessor`: valida registros y envia rechazados a `TransactionImportPort`.
+- `TransactionImportItemWriter`: escribe transacciones validas por el puerto de importacion.
+
+El endpoint `/api/batch/transactions/preview` sigue disponible para probar una transaccion individual sin lanzar el job completo.
+
 Tablas:
 
 - `batch_execution_audit`
@@ -66,7 +79,6 @@ Tablas:
 - Job Spring Batch.
 - Datos de ejemplo.
 - Reporte de errores.
-- Tests de job.
+- Tests de processor/writer.
 - Dashboard de batch.
 - ADR sobre estrategia de modernizacion.
-

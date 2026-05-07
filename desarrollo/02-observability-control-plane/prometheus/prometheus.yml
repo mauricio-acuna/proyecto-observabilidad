@@ -50,3 +50,12 @@ scrape_configs:
           - ai-ticket-triage-service:8092
         labels:
           service: ai-ticket-triage-service
+
+  - job_name: batch-reporting-modernization
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+          - host.docker.internal:8090
+          - batch-reporting-modernization:8090
+        labels:
+          service: batch-reporting-modernization

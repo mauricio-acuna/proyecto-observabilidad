@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: batch-reporting-modernization
+  datasource:
+    url: ${APP_BATCH_DATASOURCE_URL:jdbc:h2:mem:batchdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1}
+    username: ${APP_BATCH_DATASOURCE_USERNAME:sa}
+    password: ${APP_BATCH_DATASOURCE_PASSWORD:}
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      enabled: ${APP_BATCH_JOB_ENABLED:false}
+
+server:
+  port: ${SERVER_PORT:8090}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      service: ${spring.application.name}
+  tracing:
+    sampling:
+      probability: ${MANAGEMENT_TRACING_SAMPLING_PROBABILITY:1.0}
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:http://localhost:4318/v1/traces}
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

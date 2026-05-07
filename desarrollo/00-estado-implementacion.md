@@ -26,15 +26,15 @@ Resultado:
 
 ```text
 BUILD SUCCESSFUL
-69 actionable tasks: 67 executed, 2 up-to-date
+70 actionable tasks: 69 executed, 1 up-to-date
 ```
 
 Cobertura actual:
 
 - 12 proyectos compilados.
 - 12 proyectos con al menos un test unitario.
-- 38 tests detectados.
-- 35 tests ejecutados.
+- 40 tests detectados.
+- 37 tests ejecutados.
 - 3 tests de integracion Testcontainers omitidos porque Docker no esta disponible en este entorno.
 - 0 fallos.
 - 0 errores.
@@ -53,7 +53,7 @@ Nota: Gradle solo pudo ejecutarse fuera del sandbox porque dentro del sandbox fa
 | 06 RAG knowledge assistant | Pipeline RAG conceptual con puertos de vector search y LLM | Agregar pgvector/Qdrant y evaluacion de respuestas |
 | 07 Incident response runbook system | Dominio de incidentes y API | Agregar runbooks, postmortems y SLOs |
 | 08 Payment risk monitoring | Motor de reglas componibles | Agregar eventos, auditoria persistente y metricas de falsos positivos |
-| 09 Batch reporting modernization | Validacion batch y puerto de importacion | Agregar job Spring Batch real con reader/processor/writer |
+| 09 Batch reporting modernization | Validacion batch, puerto de importacion, job Spring Batch `transactionImportJob`, reader/processor/writer y tests de componentes batch | Agregar persistencia de estado y reprocesamiento |
 | 10 Platform engineering service template | Template con CI, Docker, K8s y health | Agregar generador o guia de uso del template |
 | 11 Modular monolith to microservices | Modulos internos separados por API | Agregar eventos internos y plan de extraccion |
 | 12 AI ticket triage service | Puerto de IA, salida estructurada, adapter HTTP externo configurable, validacion de output, redaccion de datos sensibles, fallback rule-based y metricas de provider/tokens/costo | Agregar pruebas de contrato WireMock |
