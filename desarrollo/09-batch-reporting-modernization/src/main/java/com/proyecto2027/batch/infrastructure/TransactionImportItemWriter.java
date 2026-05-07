@@ -10,13 +10,18 @@ import org.springframework.stereotype.Component;
 public class TransactionImportItemWriter implements ItemWriter<ImportedTransaction> {
 
     private final TransactionImportPort importPort;
+    private final BatchImportMetrics metrics;
 
-    public TransactionImportItemWriter(TransactionImportPort importPort) {
+    public TransactionImportItemWriter(TransactionImportPort importPort, BatchImportMetrics metrics) {
         this.importPort = importPort;
+        this.metrics = metrics;
     }
 
     @Override
     public void write(Chunk<? extends ImportedTransaction> chunk) {
-        chunk.forEach(importPort::storeValid);
+        chunk.forEach(transaction -> {
+            importPort.storeValid(transaction);
+            metrics.recordValid();
+        });
     }
 }

@@ -14,6 +14,11 @@ El siguiente paso es persistir metadata de ejecucion para reiniciar lotes fallid
 `TransactionImportPort` separa registros validos y rechazados, patron habitual en integraciones batch.
 El processor envia rechazados con motivo y el writer envia validos al mismo puerto.
 
+## Metricas batch
+
+`BatchImportMetrics` publica `batch_transactions_total` con resultado `valid` o `rejected`.
+Esto permite medir calidad del archivo y volumen procesado sin leer logs.
+
 ## Conceptos del perfil que cubre
 
 - Modernizacion legacy.

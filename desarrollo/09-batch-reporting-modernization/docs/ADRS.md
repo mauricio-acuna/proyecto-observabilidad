@@ -25,4 +25,5 @@ Permite demostrar chunk-oriented processing sin bloquear el proyecto por infraes
 
 - El processor filtra registros invalidos y registra rechazados.
 - El writer persiste validos mediante `TransactionImportPort`.
+- Las metricas batch exponen validos y rechazados por contador Micrometer.
 - Falta persistir metadata de ejecucion y habilitar reprocesamiento real con base de datos.

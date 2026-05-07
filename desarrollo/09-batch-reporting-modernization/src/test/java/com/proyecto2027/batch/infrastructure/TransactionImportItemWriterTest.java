@@ -2,6 +2,7 @@ package com.proyecto2027.batch.infrastructure;
 
 import com.proyecto2027.batch.application.TransactionImportPort;
 import com.proyecto2027.batch.domain.ImportedTransaction;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.item.Chunk;
 
@@ -26,7 +27,8 @@ class TransactionImportItemWriterTest {
             public void storeRejected(ImportedTransaction transaction, String reason) {
             }
         };
-        var writer = new TransactionImportItemWriter(port);
+        var registry = new SimpleMeterRegistry();
+        var writer = new TransactionImportItemWriter(port, new BatchImportMetrics(registry));
 
         writer.write(Chunk.of(
                 new ImportedTransaction("tx-1", LocalDate.now(), BigDecimal.TEN, "EUR", "cust"),
@@ -34,5 +36,9 @@ class TransactionImportItemWriterTest {
         ));
 
         assertThat(valid).hasValue(2);
+        assertThat(registry.get("batch_transactions_total")
+                .tag("result", "valid")
+                .counter()
+                .count()).isEqualTo(2.0);
     }
 }

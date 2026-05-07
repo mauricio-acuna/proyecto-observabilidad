@@ -2,6 +2,7 @@ package com.proyecto2027.batch.infrastructure;
 
 import com.proyecto2027.batch.application.TransactionImportPort;
 import com.proyecto2027.batch.domain.ImportedTransaction;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -25,7 +26,8 @@ class TransactionValidationItemProcessorTest {
                 rejected.incrementAndGet();
             }
         };
-        var processor = new TransactionValidationItemProcessor(port);
+        var registry = new SimpleMeterRegistry();
+        var processor = new TransactionValidationItemProcessor(port, new BatchImportMetrics(registry));
 
         ImportedTransaction valid = new ImportedTransaction("tx-1", LocalDate.now(), BigDecimal.TEN, "EUR", "cust");
         ImportedTransaction invalid = new ImportedTransaction("tx-2", LocalDate.now(), BigDecimal.TEN.negate(), "EUR", "cust");
@@ -33,5 +35,9 @@ class TransactionValidationItemProcessorTest {
         assertThat(processor.process(valid)).isEqualTo(valid);
         assertThat(processor.process(invalid)).isNull();
         assertThat(rejected).hasValue(1);
+        assertThat(registry.get("batch_transactions_total")
+                .tag("result", "rejected")
+                .counter()
+                .count()).isEqualTo(1.0);
     }
 }

@@ -15,6 +15,7 @@ Muchas empresas mantienen procesos batch antiguos para reportes, conciliaciones 
 - Reintentos.
 - Reprocesamiento controlado.
 - Metricas de batch.
+- Metrica `batch_transactions_total` por resultado `valid` o `rejected`.
 
 ## Stack aplicado
 
@@ -56,6 +57,7 @@ Componentes:
 - `transactionItemReader`: reader con datos de ejemplo.
 - `TransactionValidationItemProcessor`: valida registros y envia rechazados a `TransactionImportPort`.
 - `TransactionImportItemWriter`: escribe transacciones validas por el puerto de importacion.
+- `BatchImportMetrics`: registra transacciones validas y rechazadas.
 
 El endpoint `/api/batch/transactions/preview` sigue disponible para probar una transaccion individual sin lanzar el job completo.
 
@@ -80,5 +82,6 @@ Tablas:
 - Datos de ejemplo.
 - Reporte de errores.
 - Tests de processor/writer.
+- Tests de metricas batch.
 - Dashboard de batch.
 - ADR sobre estrategia de modernizacion.

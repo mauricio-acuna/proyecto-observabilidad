@@ -9,9 +9,11 @@ import org.springframework.stereotype.Component;
 public class TransactionValidationItemProcessor implements ItemProcessor<ImportedTransaction, ImportedTransaction> {
 
     private final TransactionImportPort importPort;
+    private final BatchImportMetrics metrics;
 
-    public TransactionValidationItemProcessor(TransactionImportPort importPort) {
+    public TransactionValidationItemProcessor(TransactionImportPort importPort, BatchImportMetrics metrics) {
         this.importPort = importPort;
+        this.metrics = metrics;
     }
 
     @Override
@@ -20,6 +22,7 @@ public class TransactionValidationItemProcessor implements ItemProcessor<Importe
             return item;
         }
         importPort.storeRejected(item, "Invalid transaction fields");
+        metrics.recordRejected();
         return null;
     }
 }
